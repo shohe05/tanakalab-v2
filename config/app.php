@@ -156,6 +156,15 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /**
+         * Additional Service Providers...
+         */
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        App\Repositories\RepositoryServiceProvider::class,
+        GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+
     ],
 
     /*
