@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ja',
 
     /*
     |--------------------------------------------------------------------------
@@ -164,6 +164,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         App\Repositories\RepositoryServiceProvider::class,
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+        App\Services\ServiceServiceProvider::class,
+        App\Http\ApiResponse\ApiResponseServiceProvider::class,
 
     ],
 
