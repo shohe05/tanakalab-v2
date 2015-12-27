@@ -8,6 +8,7 @@ class RepositoryServiceProvider extends ServiceProvider {
 
     protected $eloquentRepositories = [
         'User',
+        'Article',
     ];
 
     /**
