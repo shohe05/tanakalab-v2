@@ -93,7 +93,7 @@ class ArticleController extends V1Controller
         try {
             $article = $this->article->find($request->route('article'));
         } catch (Exception $e) {
-            return $this->apiResponse->notFound(trans('api_response.v1.not_found'));
+            return $this->apiResponse->notFound(trans('api_response.v1.article.not_found'));
         }
 
         // Authorize
@@ -129,7 +129,7 @@ class ArticleController extends V1Controller
         try {
             $article = $this->article->find($request->route('article'));
         } catch (Exception $e) {
-            return $this->apiResponse->notFound(trans('api_response.v1.not_found'));
+            return $this->apiResponse->notFound(trans('api_response.v1.article.not_found'));
         }
 
         // Authorize
@@ -158,7 +158,7 @@ class ArticleController extends V1Controller
         try {
             $article = $this->article->find($request->route('article'));
         } catch (Exception $e) {
-            return $this->apiResponse->notFound(trans('api_response.v1.not_found'));
+            return $this->apiResponse->notFound(trans('api_response.v1.article.not_found'));
         }
 
         try {
@@ -181,7 +181,7 @@ class ArticleController extends V1Controller
         try {
             $article = $this->article->find($request->route('article'));
         } catch (Exception $e) {
-            return $this->apiResponse->notFound(trans('api_response.v1.not_found'));
+            return $this->apiResponse->notFound(trans('api_response.v1.article.not_found'));
         }
 
         try {

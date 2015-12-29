@@ -30,7 +30,7 @@ class UserController extends V1Controller
     {
         $this->user = $user;
         $this->apiResponse = $apiResponse;
-//        $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -42,7 +42,7 @@ class UserController extends V1Controller
         try {
             $user = $this->user->find($request->route('user'));
         } catch (Exception $e) {
-            return $this->apiResponse->notFound(trans('api_response.v1.not_found'));
+            return $this->apiResponse->notFound(trans('api_response.v1.user.not_found'));
         }
 
         $user = $this->user->formatForShow($user);
@@ -59,7 +59,7 @@ class UserController extends V1Controller
         try {
             $this->user->delete($id);
         } catch (Exception $e) {
-            return $this->apiResponse->notFound(trans('api_response.v1.not_found'));
+            return $this->apiResponse->notFound(trans('api_response.v1.user.not_found'));
         }
         return $this->apiResponse->success(trans('api_response.v1.user.delete_success'));
     }

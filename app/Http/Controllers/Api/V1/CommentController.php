@@ -66,7 +66,7 @@ class CommentController extends V1Controller
         try {
             $comment = $this->comment->find($request->route('comment'));
         } catch (Exception $e) {
-            return $this->apiResponse->notFound(trans('api_response.v1.not_found'));
+            return $this->apiResponse->notFound(trans('api_response.v1.comment.not_found'));
         }
 
         // Authorize
@@ -99,8 +99,13 @@ class CommentController extends V1Controller
     {
         $user = $request->user();
 
+        try {
+            $comment = $this->comment->find($request->route('comment'));
+        } catch (Exception $e) {
+            return $this->apiResponse->notFound(trans('api_response.v1.comment.not_found'));
+        }
+
         // Authorize
-        $comment = $this->comment->find($request->route('comment'));
         if ($user->id != $comment->user->id) {
             return $this->apiResponse->unauthorized(trans('api_response.v1.comment.no_permission'));
         }
