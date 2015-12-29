@@ -72,7 +72,7 @@ class ApiResponse implements ApiResponseInterface
      */
     public function internalServerError()
     {
-        return $this->jsonResponse('Internal Server Error', ['Please contact developer.'], 500);
+        return $this->jsonResponse('Internal Server Error', [trans('api_response.v1.internal_server_error')], 500);
     }
 
     /**

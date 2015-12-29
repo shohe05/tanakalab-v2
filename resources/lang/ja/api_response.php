@@ -3,6 +3,7 @@
 return [
     'v1' => [
         'please_login' => 'ログインしてください',
+        'internal_server_error' => 'サーバーエラーです。開発者に連絡してください',
         'not_found' => '存在しません',
         'user' => [
             'login_failed' => 'メールアドレスかパスワードが違います',
