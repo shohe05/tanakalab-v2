@@ -104,6 +104,16 @@ $validation = [
     */
 
     'attributes' => [
+        'article' => [
+            'title' => '記事のタイトル',
+            'body' => '記事の本文',
+        ],
+        'tags' => 'タグ',
+        'body' => 'コメントの本文',
+        'name' => 'ユーザー名',
+        'email' => 'メールアドレス',
+        'password' => 'パスワード',
+        'password_confirmation' => 'パスワード確認',
     ],
 
 ];
