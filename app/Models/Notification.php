@@ -116,8 +116,8 @@ class Notification extends Model {
 
             //メール送信
             //TODO: 非同期で処理したいけど、とりあえずここで
-            // $this->mailNotification($notification, $target_instance);
-            $this->postSlack($notification, $target_instance);
+             $this->mailNotification($notification, $target_instance);
+//            $this->postSlack($notification, $target_instance);
         }
     }
 

@@ -5,6 +5,7 @@ use Markdown;
 use Auth;
 use Log;
 use DB;
+use Illuminate\Support\Collection;
 
 class Article extends Model {
 
@@ -53,24 +54,6 @@ class Article extends Model {
     }
 
     /**
-     * 記事とタグを一度に作成
-     *
-     * @param $article_input
-     * @param $tag_inputs
-     * @return mixed
-     */
-    public function createWithTags($article_input, $tag_inputs)
-    {
-        return DB::transaction(function() use($article_input, $tag_inputs) {
-            $article = Auth::user()->articles()->create($article_input);
-
-            $tags = Tag::FirstOrCreateByNames($tag_inputs);
-            $article->syncTags($tags);
-            return $article;
-        });
-    }
-
-    /**
      * 記事とタグを一度に更新
      *
      * @param $article_input
@@ -94,7 +77,7 @@ class Article extends Model {
     /**
      * 記事とタグの中間テーブルのレコードを作成
      *
-     * @param $tags 記事に紐づけるTagオブジェクトの配列
+     * @param Collection $tags
      */
     public function syncTags($tags)
     {
@@ -109,14 +92,13 @@ class Article extends Model {
      */
     public function deleteWithRelations()
     {
+        // TODO: SQL文使わない
+        // TODO: Eloquent使わない
         Comment::where('article_id', '=', $this->id)->delete();
         Stock::where('article_id', '=', $this->id)->delete();
         $tag_ids = $this->tags->lists('id');
         foreach($tag_ids as $tag_id) {
             DB::delete('delete from article_tag where tag_id = ? and article_id = ?', [$tag_id, $this->id]);
-        }
-        foreach([Notification::TYPE_ARTICLE_POSTED, Notification::TYPE_ARTICLE_UPDATED] as $type) {
-            DB::delete('delete from notifications where type = ? and target_id = ?', [$type, $this->id]);
         }
         $this->delete();
     }

@@ -4,9 +4,20 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use App\Http\ApiResponse\Contracts\ApiResponseInterface as ApiResponse;
 
 class Authenticate
 {
+    /**
+     * @var ApiResponse
+     */
+    protected $apiResponse;
+
+    public function __construct(ApiResponse $apiResponse)
+    {
+        $this->apiResponse = $apiResponse;
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -17,12 +28,8 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->guest()) {
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->guest('login');
-            }
+        if (!(Auth::check() || Auth::viaRemember())) {
+            return $this->apiResponse->unauthorized([trans('api_response.v1.please_login')]);
         }
 
         return $next($request);

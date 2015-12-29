@@ -9,6 +9,7 @@ class ServiceServiceProvider extends ServiceProvider {
     protected $services = [
         'Article',
         'User',
+        'Comment',
     ];
 
     /**

@@ -2,9 +2,8 @@
 
 namespace App\Services\Contracts;
 
-interface UserServiceInterface
+interface CommentServiceInterface
 {
-
     /**
      * @param $input
      * @return \Illuminate\Validation\Validator
@@ -15,11 +14,18 @@ interface UserServiceInterface
      * @param $input
      * @return mixed
      */
-    public function create($input);
+    public function create($user_id, $article_id, $input);
 
     /**
      * @param $id
+     * @param $input
      * @return mixed
+     */
+    public function update($id, $input);
+
+    /**
+     * @param $id
+     * @return int
      */
     public function delete($id);
 
@@ -28,10 +34,4 @@ interface UserServiceInterface
      * @return mixed
      */
     public function find($id);
-
-    /**
-     * @param $user
-     * @return array
-     */
-    public function formatForShow($user);
 }

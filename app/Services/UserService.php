@@ -56,4 +56,31 @@ class UserService implements UserServiceInterface
     {
         return $this->userRepository->delete($id);
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function find($id)
+    {
+        return $this->userRepository->find($id);
+    }
+
+    /**
+     * @param $user
+     * @return array
+     */
+    public function formatForShow($user)
+    {
+        return [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'created_at' => $user->created_at->format('Y-m-d H:i:s'),
+            'updated_at' => $user->updated_at->format('Y-m-d H:i:s'),
+            'articles' => $user->articles,
+            'comments' => $user->comments,
+            'clips' => $user->clips,
+        ];
+    }
 }

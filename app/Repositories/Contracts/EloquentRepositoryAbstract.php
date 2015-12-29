@@ -11,4 +11,16 @@ use Prettus\Repository\Eloquent\BaseRepository;
  */
 abstract class EloquentRepositoryAbstract extends BaseRepository implements EloquentRepositoryInterface
 {
+
+    /**
+     * @param $column
+     * @param null $operator
+     * @param null $value
+     * @param string $boolean
+     * @return $this
+     */
+    public function where($column, $operator = null, $value = null, $boolean = 'and')
+    {
+        return $this->model->where($column, $operator, $value, $boolean);
+    }
 }

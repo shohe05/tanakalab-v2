@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Services\Contracts\UserServiceInterface as User;
 use App\Http\ApiResponse\Contracts\ApiResponseInterface as ApiResponse;
 use Exception;
-use Auth;
 
 class UserController extends V1Controller
 {
@@ -22,49 +21,46 @@ class UserController extends V1Controller
      */
     protected $apiResponse;
 
+    /**
+     * UserController constructor.
+     * @param User $user
+     * @param ApiResponse $apiResponse
+     */
     public function __construct(User $user, ApiResponse $apiResponse)
     {
         $this->user = $user;
         $this->apiResponse = $apiResponse;
+//        $this->middleware('auth');
     }
 
-    public function create(Request $request)
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function show(Request $request)
     {
-        // Validation
-        $validator = $this->user->validator($request->all());
-        if ($validator->fails()) {
-            return $this->apiResponse->validationError($validator->errors());
-        }
-
-        // Create
         try {
-            $user = $this->user->create($request->all());
+            $user = $this->user->find($request->route('user'));
         } catch (Exception $e) {
-            return $this->apiResponse->internalServerError();
+            return $this->apiResponse->notFound(trans('api_response.v1.not_found'));
         }
 
+        $user = $this->user->formatForShow($user);
         return $this->apiResponse->success($user);
     }
 
-    public function login(Request $request)
-    {
-        if (Auth::viaRemember() || Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')], true)) {
-            return $this->apiResponse->success(Auth::user());
-        }
-
-        return $this->apiResponse->unauthorized(trans('api_response.v1.user.login_failed'));
-    }
-
-    public function logout()
-    {
-        Auth::logout();
-        return $this->apiResponse->success(trans('api_response.v1.user.logout_success'));
-    }
-
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function delete(Request $request)
     {
         $id = $request->route('user');
-        $this->user->delete($id);
+        try {
+            $this->user->delete($id);
+        } catch (Exception $e) {
+            return $this->apiResponse->notFound(trans('api_response.v1.not_found'));
+        }
         return $this->apiResponse->success(trans('api_response.v1.user.delete_success'));
     }
 

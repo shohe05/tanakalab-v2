@@ -12,12 +12,26 @@ class ApiResponse implements ApiResponseInterface
 {
 
     /**
+     * @var array
+     */
+    protected $meta = [];
+
+    /**
      * @param $data
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function success($data)
     {
-        return $this->jsonResponse(2000, 'Success', $data);
+        return $this->jsonResponse('Success', $data);
+    }
+
+    /**
+     * @param $data
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function created($data)
+    {
+        return $this->jsonResponse('Created', $data, 201);
     }
 
     /**
@@ -26,7 +40,7 @@ class ApiResponse implements ApiResponseInterface
      */
     public function validationError($errors)
     {
-        return $this->jsonResponse(4000, 'Validation Error', ['errors' => $errors], 400);
+        return $this->jsonResponse('Validation Error', ['errors' => $errors], 400);
     }
 
     /**
@@ -35,7 +49,22 @@ class ApiResponse implements ApiResponseInterface
      */
     public function unauthorized($errors)
     {
-        return $this->jsonResponse(4001, 'Unauthorized', ['errors' => $errors], 401);
+        if (!is_array($errors)) {
+            $errors = [$errors];
+        }
+        return $this->jsonResponse('Unauthorized', ['errors' => $errors], 401);
+    }
+
+    /**
+     * @param $errors
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function notFound($errors)
+    {
+        if (!is_array($errors)) {
+            $errors = [$errors];
+        }
+        return $this->jsonResponse('Not found', ['errors' => $errors], 404);
     }
 
     /**
@@ -43,24 +72,41 @@ class ApiResponse implements ApiResponseInterface
      */
     public function internalServerError()
     {
-        return $this->jsonResponse(5000, 'Internal Server Error', ['Please contact developer.'], 500);
+        return $this->jsonResponse('Internal Server Error', ['Please contact developer.'], 500);
     }
 
     /**
-     * @param $code
      * @param $status
      * @param $data
      * @param int $httpStatusCode
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function jsonResponse($code, $status, $data, $httpStatusCode = 200)
+    public function jsonResponse($status, $data, $httpStatusCode = 200)
     {
+        $this->setMeta([
+            'status' => $status
+        ]);
         return response()->json([
-            'meta' => [
-                'code' => $code,
-                'status' => $status
-            ],
+            'meta' => $this->getMeta(),
             'response' => $data
         ])->setStatusCode($httpStatusCode);
+    }
+
+    /**
+     * @param array $meta
+     * @return $this
+     */
+    public function setMeta(array $meta)
+    {
+        $this->meta = array_merge($this->meta, $meta);
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getMeta()
+    {
+        return $this->meta;
     }
 }
