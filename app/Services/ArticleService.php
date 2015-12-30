@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Repositories\Contracts\ClipRepositoryInterface as ClipRepository;
 
+
 class ArticleService implements ArticleServiceInterface
 {
 
@@ -29,13 +30,10 @@ class ArticleService implements ArticleServiceInterface
     protected $clipRepository;
 
     /**
-     * @var Request
-     */
-    protected $request;
-
-    /**
      * ArticleService constructor.
+     * @param ArticleRepository $articleRepository
      * @param TagRepository $tagRepository
+     * @param ClipRepository $clipRepository
      * @param Request $request
      */
     public function __construct(ArticleRepository $articleRepository, TagRepository $tagRepository, ClipRepository $clipRepository, Request $request)
@@ -73,6 +71,21 @@ class ArticleService implements ArticleServiceInterface
                 'user_name' => $article->user->name,
                 'created_at' => $article->created_at->format('Y-m-d H:i:s'),
                 'updated_at' => $article->updated_at->format('Y-m-d H:i:s'),
+                'tags' => $article->tags->map(function($tag) {
+                    return [
+                        'id' => $tag->id,
+                        'name' => $tag->name,
+                    ];
+                }),
+                'comments'=> $article->comments->map(function($comment) {
+                    return [
+                        'id' => $comment->id,
+                        'user_id' => $comment->user_id,
+                        'user_name' => $comment->user->name,
+                        'created_at' => $comment->created_at->format('Y-m-d H:i:s'),
+                        'updated_at' => $comment->updated_at->format('Y-m-d H:i:s'),
+                    ];
+                }),
             ];
         }
         return $data;
@@ -156,7 +169,7 @@ class ArticleService implements ArticleServiceInterface
             'user_id' => $article->user->id,
             'user_name' => $article->user->name,
             'title' => $article->title,
-            'body' => $article->body,
+            'body' => $article->parsed_body,
             'created_at' => $article->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $article->updated_at->format('Y-m-d H:i:s'),
             'tags' => $article->tags->map(function($tag) {
@@ -165,7 +178,15 @@ class ArticleService implements ArticleServiceInterface
                     'name' => $tag->name,
                 ];
             }),
-            'comments'=> $article->comments,
+            'comments'=> $article->comments->map(function($comment) {
+                return [
+                    'id' => $comment->id,
+                    'user_id' => $comment->user_id,
+                    'user_name' => $comment->user->name,
+                    'created_at' => $comment->created_at->format('Y-m-d H:i:s'),
+                    'updated_at' => $comment->updated_at->format('Y-m-d H:i:s'),
+                ];
+            }),
         ];
     }
 

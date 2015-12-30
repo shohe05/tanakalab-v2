@@ -45,7 +45,7 @@ class ArticleController extends V1Controller
             'total' => $paginator->total(),
             'last_page' => $paginator->lastPage(),
             'per_page' => $paginator->count(),
-        ])->success($articles);
+        ])->success($this->article->formatForIndex($articles));
     }
 
     /**
@@ -205,6 +205,6 @@ class ArticleController extends V1Controller
             'total' => $paginator->total(),
             'last_page' => $paginator->lastPage(),
             'per_page' => $paginator->count(),
-        ])->success($paginator->items());
+        ])->success($this->article->formatForIndex($paginator->items()));
     }
 }
