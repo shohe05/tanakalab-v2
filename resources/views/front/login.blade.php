@@ -15,7 +15,7 @@
             var email = $('#email').val();
             var password = $('#password').val();
 
-            callApi('POST', LOGIN_API_URL, {'email': email, 'password': password}, function(data){
+            _callApi('POST', LOGIN_API_URL, {'email': email, 'password': password}, function(data){
                 var token = data.response.token;
                 localStorage.setItem('token', token);
                 location.href = ARTICLE_INDEX_URL;

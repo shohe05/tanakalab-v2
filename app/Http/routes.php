@@ -6,7 +6,7 @@
 
 // ログイン画面
 Route::get('/login', function () {
-    // resouces/views/front/login.phpを描画する
+    // resources/views/front/login.phpを描画する
     return view('front.login');
 });
 

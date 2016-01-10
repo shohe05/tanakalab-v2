@@ -9,3 +9,5 @@ Thumbs.db
 .phpstorm.meta.php
 _ide_helper*
 resources/assets/vendor/
+public/build/
+public/js
