@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Article;
 use App\Repositories\Contracts\ArticleRepositoryInterface as ArticleRepository;
 use App\Repositories\Contracts\TagRepositoryInterface as TagRepository;
 use App\Repositories\Criteria\ArticleRepositoryGetArticlesStockedBySpecifiedUserIdCriteria;
@@ -10,7 +11,7 @@ use DB;
 use Illuminate\Http\Request;
 use Validator;
 use App\Repositories\Contracts\ClipRepositoryInterface as ClipRepository;
-
+use App;
 
 class ArticleService implements ArticleServiceInterface
 {
@@ -261,13 +262,18 @@ class ArticleService implements ArticleServiceInterface
     public function search($request, $page = 1, $perPage = null)
     {
         $queries = preg_split('/[\s|\x{3000}]+/u', $request->get('query'));
-        $builder = null;
+        $model = App::make(Article::class);
+        if (!is_null($request->get('clip_by', null))) {
+            $model = $model->whereHas('clips', function($clip) use ($request) {
+                $clip->where('user_id', $request->get('clip_by'));
+            });
+        }
         foreach ($queries as $query) {
-            $builder = \App\Models\Article::where(function($q) use ($query) {
+            $model = $model->where(function($q) use ($query) {
                 $q->where('title', 'LIKE', '%' . $query . '%')->where('body', 'LIKE', '%' . $query . '%', 'or');
             });
         }
         $perPage = !is_null($perPage) ? $perPage : config('pagination.perPage');
-        return $builder->paginate($perPage, ['*'], 'page', $page)->appends($request->all());
+        return $model->paginate($perPage, ['*'], 'page', $page)->appends($request->all());
     }
 }
