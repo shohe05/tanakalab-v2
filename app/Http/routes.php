@@ -1,10 +1,23 @@
 <?php
 
-// Angularのルート
+/**
+ * フロントアプリ
+ */
+
+// ログイン画面
+Route::get('/login', function () {
+    // resouces/views/front/login.phpを描画する
+    return view('front.login');
+});
+
+// 一覧画面
 Route::get('/', function () {
     return view('front.index');
 });
 
+/**
+ * API
+ */
 Route::group(['prefix' => 'api', 'namespace' => 'Api'], function() {
     Route::group(['prefix' => 'v1', 'namespace' => 'V1'], function() {
         // ユーザー登録
