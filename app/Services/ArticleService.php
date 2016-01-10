@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\Contracts\ArticleRepositoryInterface as ArticleRepository;
 use App\Repositories\Contracts\TagRepositoryInterface as TagRepository;
+use App\Repositories\Criteria\ArticleRepositoryGetArticlesStockedBySpecifiedUserIdCriteria;
 use App\Services\Contracts\ArticleServiceInterface;
 use DB;
 use Illuminate\Http\Request;
@@ -52,6 +53,10 @@ class ArticleService implements ArticleServiceInterface
      */
     public function get($request, $page = 1, $perPage = null)
     {
+        if (!is_null($request->get('clip_by', null))) {
+            $this->articleRepository->pushCriteria(new ArticleRepositoryGetArticlesStockedBySpecifiedUserIdCriteria($request->get('clip_by')));
+        }
+
         $perPage = !is_null($perPage) ? $perPage : config('pagination.perPage');
         return $this->articleRepository->paginate($perPage, ['*'], 'page', $page)->appends($request->all());
     }
@@ -176,6 +181,12 @@ class ArticleService implements ArticleServiceInterface
                 return [
                     'id' => $tag->id,
                     'name' => $tag->name,
+                ];
+            }),
+            'clips' => $article->clips->map(function($clip) {
+                return [
+                    'user_id' => $clip->user->id,
+                    'user_name' => $clip->user->name,
                 ];
             }),
             'comments'=> $article->comments->map(function($comment) {

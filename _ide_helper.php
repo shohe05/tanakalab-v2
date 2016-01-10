@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.2.5 on 2015-12-30.
+ * Generated for Laravel 5.2.7 on 2016-01-10.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -3100,11 +3100,23 @@ namespace {
          *
          * @param int $count
          * @param callable $callback
-         * @return void 
+         * @return bool 
          * @static 
          */
         public static function chunk($count, $callback){
-            \Illuminate\Database\Eloquent\Builder::chunk($count, $callback);
+            return \Illuminate\Database\Eloquent\Builder::chunk($count, $callback);
+        }
+        
+        /**
+         * Execute a callback over each item while chunking.
+         *
+         * @param callable $callback
+         * @param int $count
+         * @return bool 
+         * @static 
+         */
+        public static function each($callback, $count = 1000){
+            return \Illuminate\Database\Eloquent\Builder::each($callback, $count);
         }
         
         /**
@@ -3221,7 +3233,7 @@ namespace {
         }
         
         /**
-         * Add a relationship count condition to the query.
+         * Add a relationship count / exists condition to the query.
          *
          * @param string $relation
          * @param string $operator
@@ -3236,7 +3248,7 @@ namespace {
         }
         
         /**
-         * Add a relationship count condition to the query.
+         * Add a relationship count / exists condition to the query.
          *
          * @param string $relation
          * @param string $boolean
@@ -3249,7 +3261,7 @@ namespace {
         }
         
         /**
-         * Add a relationship count condition to the query with where clauses.
+         * Add a relationship count / exists condition to the query with where clauses.
          *
          * @param string $relation
          * @param \Closure $callback
@@ -3263,7 +3275,7 @@ namespace {
         }
         
         /**
-         * Add a relationship count condition to the query with where clauses.
+         * Add a relationship count / exists condition to the query with where clauses.
          *
          * @param string $relation
          * @param \Closure|null $callback
@@ -3275,7 +3287,7 @@ namespace {
         }
         
         /**
-         * Add a relationship count condition to the query with an "or".
+         * Add a relationship count / exists condition to the query with an "or".
          *
          * @param string $relation
          * @param string $operator
@@ -3288,7 +3300,7 @@ namespace {
         }
         
         /**
-         * Add a relationship count condition to the query with where clauses and an "or".
+         * Add a relationship count / exists condition to the query with where clauses and an "or".
          *
          * @param string $relation
          * @param \Closure $callback
@@ -3717,6 +3729,19 @@ namespace {
          */
         public static function orWhereNotExists($callback){
             return \Illuminate\Database\Query\Builder::orWhereNotExists($callback);
+        }
+        
+        /**
+         * Add an exists clause to the query.
+         *
+         * @param \Illuminate\Database\Query\Builder $query
+         * @param string $boolean
+         * @param bool $not
+         * @return $this 
+         * @static 
+         */
+        public static function addWhereExistsQuery($query, $boolean = 'and', $not = false){
+            return \Illuminate\Database\Query\Builder::addWhereExistsQuery($query, $boolean, $not);
         }
         
         /**

@@ -41,6 +41,12 @@ class Article extends Model {
         return $this->hasMany(Clip::class);
     }
 
+    public function syncTags($tags)
+    {
+        $tag_ids = array_pluck($tags->toArray(), 'id');
+        $this->tags()->sync($tag_ids);
+    }
+
     /**
      * bodyをMarkdown形式に変換して返す
      *
