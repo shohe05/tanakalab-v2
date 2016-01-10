@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\ApiResponse\Contracts\ApiResponseInterface as ApiResponse;
 use App\Services\Contracts\UserServiceInterface as User;
 use Exception;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends V1Controller
 {
@@ -48,11 +50,17 @@ class AuthController extends V1Controller
 
     public function login(Request $request)
     {
-        if (Auth::viaRemember() || Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')], true)) {
-            return $this->apiResponse->success(Auth::user());
+        $credentials = $request->only('email', 'password');
+
+        try {
+            if (! $token = JWTAuth::attempt($credentials)) {
+                return $this->apiResponse->unauthorized(trans('api_response.v1.user.login_failed'));
+            }
+        } catch (JWTException $e) {
+            return $this->apiResponse->internalServerError();
         }
 
-        return $this->apiResponse->unauthorized(trans('api_response.v1.user.login_failed'));
+        return $this->apiResponse->success(compact('token'));
     }
 
     public function logout()

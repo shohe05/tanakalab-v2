@@ -30,7 +30,7 @@ class ArticleController extends V1Controller
     {
         $this->article = $article;
         $this->apiResponse = $apiResponse;
-        $this->middleware('auth');
+        $this->middleware('jwt.auth');
     }
 
     /**

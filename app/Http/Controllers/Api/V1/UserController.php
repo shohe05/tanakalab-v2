@@ -30,7 +30,7 @@ class UserController extends V1Controller
     {
         $this->user = $user;
         $this->apiResponse = $apiResponse;
-        $this->middleware('auth');
+        $this->middleware('jwt.auth');
     }
 
     /**

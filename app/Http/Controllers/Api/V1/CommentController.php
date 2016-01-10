@@ -29,7 +29,7 @@ class CommentController extends V1Controller
     {
         $this->comment = $comment;
         $this->apiResponse = $apiResponse;
-        $this->middleware('auth');
+        $this->middleware('jwt.auth');
     }
 
     /**
