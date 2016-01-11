@@ -3,25 +3,30 @@
  */
 function redirectIfNotLogin()
 {
-    if (!localStorage.getItem('token')) {
+    var header = {
+        Authorization: 'Bearer' + localStorage.getItem('token')
+    };
+
+    _ajax(_makeAjaxOption('GET', CHECK_LOGIN_API_URL, {}, header), function(res) {}, function(res) {
         location.href = LOGIN_URL;
-    }
+    });
 }
 
 /**
  * $.ajaxのラッパー
  *
  * @param option
- * @param callback
+ * @param successCallback
+ * @param failedCallback
  * @private
  */
-function _ajax(option, callback) {
+function _ajax(option, successCallback, failedCallback) {
     $.ajax(
         option
     ).done(function(res) {
-        callback(res);
+        successCallback(res);
     }).fail(function(res) {
-        alert(res.responseJSON.response.errors.join(','));
+        failedCallback(res);
     });
 }
 
@@ -35,7 +40,9 @@ function _ajax(option, callback) {
  * @private
  */
 function _callApi(method, url, data, callback) {
-    _ajax(_makeAjaxOption(method, url, data, {}), callback);
+    _ajax(_makeAjaxOption(method, url, data, {}), callback, function(res) {
+        alert(res.responseJSON.response.errors.join(','));
+    });
 }
 
 /**
@@ -52,7 +59,9 @@ function _callAuthApi(method, url, data, callback) {
         Authorization: 'Bearer' + localStorage.getItem('token')
     };
 
-    _ajax(_makeAjaxOption(method, url, data, header), callback);
+    _ajax(_makeAjaxOption(method, url, data, header), callback, function(res) {
+        alert(res.responseJSON.response.errors.join(','));
+    });
 }
 
 /**
@@ -70,6 +79,6 @@ function _makeAjaxOption(method, url, data, header) {
         type: method,
         url: url,
         data: data,
-        header: header
+        headers: header
     };
 }

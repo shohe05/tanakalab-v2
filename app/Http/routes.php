@@ -24,6 +24,8 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function() {
         Route::post('auth/register', ['as' => 'api.v1.auth.register', 'uses' => 'AuthController@register']);
         // ログイン
         Route::post('auth/login', ['as' => 'api.v1.auth.login', 'uses' => 'AuthController@login']);
+        // ログイン済みかチェックする
+        Route::get('auth/check', ['as' => 'api.v1.auth.check', 'uses' => 'AuthController@check']);
         // ログアウト
         Route::delete('auth/logout', ['as' => 'api.v1.auth.logout', 'uses' => 'AuthController@logout']);
         // ユーザー詳細

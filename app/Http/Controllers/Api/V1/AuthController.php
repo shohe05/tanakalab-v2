@@ -10,6 +10,7 @@ use App\Services\Contracts\UserServiceInterface as User;
 use Exception;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 
 class AuthController extends V1Controller
 {
@@ -61,6 +62,36 @@ class AuthController extends V1Controller
         }
 
         return $this->apiResponse->success(compact('token'));
+    }
+
+    public function check(Request $request, \Tymon\JWTAuth\JWTAuth $auth)
+    {
+        if (!$this->isLogin($request, $auth)) {
+            return $this->apiResponse->unauthorized([]);
+        }
+
+        return $this->apiResponse->success([]);
+    }
+
+    private function isLogin(Request $request, \Tymon\JWTAuth\JWTAuth $auth)
+    {
+        if (! $token = $auth->setRequest($request)->getToken()) {
+            return false;
+        }
+
+        try {
+            $user = $auth->authenticate($token);
+        } catch (TokenExpiredException $e) {
+            return false;
+        } catch (JWTException $e) {
+            return false;
+        }
+
+        if (! $user) {
+            return false;
+        }
+
+        return true;
     }
 
     public function logout()
