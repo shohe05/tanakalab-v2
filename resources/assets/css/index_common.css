@@ -1,0 +1,151 @@
+/** PC, スマホに共通するCSS **/
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    font-family: "Lato",Arial,"ヒラギノ角ゴPro W3","Hiragino Kaku Gothic Pro","メイリオ",Meiryo,"ＭＳ Ｐゴシック",sans-serif;
+}
+
+h1, h2, h3, p, span {
+    font-weight: nomal !important;
+}
+
+#nav {
+    background: #45acc6;
+}
+
+#nav i {
+    color: rgba(0, 0, 0, 0.1);
+    transition-duration: 0.3s;
+}
+
+#nav i:hover {
+    color: white;
+}
+
+#nav-ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav-ul li span {
+    color: white;
+}
+
+#nav-ul li a {
+    text-decoration: none;
+}
+
+#nav-ul .current i {
+    color: white;
+}
+
+#header {
+    background: #add7de;
+}
+
+#header .fa-search {
+    position: absolute;
+    top: 16px;
+    left: 50px;
+    color: #a3a197;
+}
+
+#search-text-box {
+    margin-top: 6px;
+    padding: 8px 8px 8px 40px;
+    width: 300px;
+    height: 20px;
+    border: medium none;
+    font-size: 16px;
+    border-radius: 30px;
+    transition: all 0.2s ease-out 0s;
+    background: #a1c6cc;
+    color: grey;
+}
+
+#search-text-box:focus {
+    width: 400px;
+    background: white;
+    border-color: #66afe9;
+}
+
+#article-filter ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#article-filter li {
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+    padding-left: 10px;
+    float: left;
+}
+
+#article-filter li:not(:first-child) {
+    margin-left: 10px;
+}
+
+#article-filter li span {
+    background: #f0f0f0;
+    border-radius: 20px;
+    color: #808893;
+    padding: 0 7px;
+    padding-top: 3px;
+    font-size: 14px;
+}
+
+#article-filter li a {
+    text-decoration: none;
+    color: black;
+}
+
+#article-list {
+    clear: both;
+    margin-top: 80px;
+}
+
+#article-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#article-list > ul > li {
+    /*background: #efefef;*/
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#content-title {
+    margin: 0;
+    margin-bottom: 30px;
+}
+
+#article-list li h2 {
+    clear: both;
+    margin: 0;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+#article-list ul > li > ul {
+    height: 30px;
+}
+
+#article-list li ul li {
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 0 20px;
+    float: left;
+}
+
+#article-list li i {
+    color: #b8bcc4;
+}
+
+a.article-link {
+    text-decoration: none;
+    color: black;
+}
+
+a.article-link:hover {
+    color: #519bb6;
+}

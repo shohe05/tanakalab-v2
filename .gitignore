@@ -11,3 +11,4 @@ _ide_helper*
 resources/assets/vendor/
 public/build/
 public/js
+public/css

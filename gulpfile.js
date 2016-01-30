@@ -33,11 +33,18 @@ elixir(function(mix) {
     //mix.less('app.less', 'public/css');
 
     // vendor.css
-    //mix.styles([
+    mix.styles([
     //    'bootstrap/dist/css/bootstrap.css',
-    //    'font-awesome/css/font-awesome.css',
+        'font-awesome/css/font-awesome.css'
     //    'datetimepicker/jquery.datetimepicker.css'
-    //], 'public/css/vendor.css', bowerDir);
+    ], 'public/css/vendor.css', bowerDir);
+
+    // app.js
+    mix.styles([
+        'index_common.css',
+        'index_pc.css',
+        'index_sp.css'
+    ], 'public/css/app.css');
 
     // vendor.js
     mix.scripts([
@@ -63,7 +70,9 @@ elixir(function(mix) {
     // version
     mix.version([
         'public/js/app.js',
-        'public/js/vendor.js'
+        'public/js/vendor.js',
+        'public/css/vendor.css',
+        'public/css/app.css'
     ]);
 
 
