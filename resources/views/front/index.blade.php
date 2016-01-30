@@ -3,8 +3,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>記事一覧 | Tanakalab</title>
-    <link rel="stylesheet" href="{{ elixir("css/vendor.css") }}">
     <link rel="stylesheet" href="{{ elixir("css/app.css") }}">
+    <link rel="stylesheet" href="{{ elixir("css/vendor.css") }}">
     <script src="{{ elixir("js/vendor.js") }}"></script>
     <script src="{{ elixir("js/app.js") }}"></script>
     <script>
@@ -71,7 +71,7 @@
       Article.all().then(function(data) {
         var articles = data.response;
         var articleList = ArticleView.renderList(articles);
-        $('#article-list').append(articleList);
+        $('#article-list>ul').append(articleList);
       })
     })
   </script>
