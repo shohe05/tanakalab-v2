@@ -4,9 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>記事一覧 | Tanakalab</title>
     <link rel="stylesheet" href="{{ elixir("css/vendor.css") }}">
-    <link rel="stylesheet" href="{{ elixir("css/common.css") }}">
-    <link rel="stylesheet" href="{{ elixir("css/pc.css") }}">
-    <link rel="stylesheet" href="{{ elixir("css/sp.css") }}">
+    <link rel="stylesheet" href="{{ elixir("css/app.css") }}">
     <script src="{{ elixir("js/vendor.js") }}"></script>
     <script src="{{ elixir("js/app.js") }}"></script>
     <script>

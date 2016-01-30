@@ -11,7 +11,7 @@ var ArticleView = {
         var dom = '';
         $.each(articles, function() {
             var clip_length = this.clips === undefined ? 0 : this.clips.length;
-            var comment_length = this.clips === undefined ? 0 : this.comments.length;
+            var comment_length = this.comments === undefined ? 0 : this.comments.length;
             dom += '<li><a href="' + ARTICLE_DETAIL_URL + this.id + '" class="article-link"><h2>' + this.title + '</h2></a><ul><li><i class="fa fa-thumb-tack"></i>&nbsp;&nbsp;' + clip_length +  '</li><li><i class="fa fa-comment"></i>&nbsp;&nbsp;' + comment_length +  '</li></ul></li>';
         });
         return dom;
