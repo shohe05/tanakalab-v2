@@ -1,8 +1,7 @@
 /**
  * ログインしてなかったらログインページにリダイレクトする
  */
-function redirectIfNotLogin()
-{
+function redirectIfNotLogin() {
     var header = {
         Authorization: 'Bearer' + localStorage.getItem('token')
     };
@@ -59,8 +58,8 @@ function _callAuthApi(method, url, data, callback) {
         Authorization: 'Bearer' + localStorage.getItem('token')
     };
 
-    _ajax(_makeAjaxOption(method, url, data, header), callback, function(res) {
-        alert(res.responseJSON.response.errors.join(','));
+    _ajax(_makeAjaxOption(method, url, data, header), callback, function(jqXHR, textStatus) {
+        alert(jqXHR.responseJSON.response.errors.join('\n'));
     });
 }
 

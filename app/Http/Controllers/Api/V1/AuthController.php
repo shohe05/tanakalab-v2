@@ -36,7 +36,7 @@ class AuthController extends V1Controller
         // Validation
         $validator = $this->user->validator($request->all());
         if ($validator->fails()) {
-            return $this->apiResponse->validationError($validator->errors());
+            return $this->apiResponse->validationError(array_flatten($validator->errors()->toArray()));
         }
 
         // Create

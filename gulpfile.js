@@ -41,13 +41,18 @@ elixir(function(mix) {
 
     // vendor.js
     mix.scripts([
-        'jquery/dist/jquery.min.js'
+        'jquery/dist/jquery.min.js',
+        'marked/marked.min.js'
     ], 'public/js/vendor.js', bowerDir);
 
     // app.js
     mix.scripts([
-        'app.js',
-        'const.js'
+        'const.js',
+        'article.js',
+        'article_view.js',
+        'comment.js',
+        'comment_view.js',
+        'app.js'
     ], 'public/js/app.js');
 
     // app.css

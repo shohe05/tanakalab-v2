@@ -15,6 +15,16 @@ Route::get('/', function () {
     return view('front.index');
 });
 
+// 投稿画面
+Route::get('/article/create', function () {
+    return view('front.create');
+});
+
+// 詳細画面
+Route::get('/article/{id}', function () {
+    return view('front.detail');
+});
+
 /**
  * API
  */

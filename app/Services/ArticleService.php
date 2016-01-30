@@ -175,7 +175,7 @@ class ArticleService implements ArticleServiceInterface
             'user_id' => $article->user->id,
             'user_name' => $article->user->name,
             'title' => $article->title,
-            'body' => $article->parsed_body,
+            'body' => $article->body,
             'created_at' => $article->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $article->updated_at->format('Y-m-d H:i:s'),
             'tags' => $article->tags->map(function($tag) {
@@ -195,6 +195,7 @@ class ArticleService implements ArticleServiceInterface
                     'id' => $comment->id,
                     'user_id' => $comment->user_id,
                     'user_name' => $comment->user->name,
+                    'body' => $comment->body,
                     'created_at' => $comment->created_at->format('Y-m-d H:i:s'),
                     'updated_at' => $comment->updated_at->format('Y-m-d H:i:s'),
                 ];

@@ -41,7 +41,7 @@ class CommentController extends V1Controller
         // Validation
         $validator = $this->comment->validator($request->all());
         if ($validator->fails()) {
-            return $this->apiResponse->validationError($validator->errors());
+            return $this->apiResponse->validationError(array_flatten($validator->errors()->toArray()));
         }
 
         // Create
@@ -51,8 +51,14 @@ class CommentController extends V1Controller
         } catch (Exception $e) {
             return $this->apiResponse->internalServerError();
         }
-
-        return $this->apiResponse->created($comment);
+        return $this->apiResponse->created([
+            'id' => $comment->id,
+            'user_id' => $comment->user_id,
+            'user_name' => $comment->user->name,
+            'body' => $comment->body,
+            'created_at' => $comment->created_at->format('Y-m-d H:i:s'),
+            'updated_at' => $comment->updated_at->format('Y-m-d H:i:s'),
+        ]);
     }
 
     /**

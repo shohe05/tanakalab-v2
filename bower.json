@@ -13,6 +13,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "2.*"
+    "jquery": "2.*",
+    "marked": "~0.3.*"
   }
 }
