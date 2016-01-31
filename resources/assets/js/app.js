@@ -6,9 +6,15 @@ function redirectIfNotLogin() {
         Authorization: 'Bearer' + localStorage.getItem('token')
     };
 
-    _ajax(_makeAjaxOption('GET', CHECK_LOGIN_API_URL, {}, header), function(res) {}, function(res) {
+    _ajax(_makeAjaxOption('GET', CHECK_LOGIN_API_URL, {}, header), function(res) {
+        localStorage.setItem('loginUser', JSON.stringify(res.response));
+    }, function(res) {
         location.href = LOGIN_URL;
     });
+}
+
+function loginUser() {
+    return JSON.parse(localStorage.getItem('loginUser'));
 }
 
 /**

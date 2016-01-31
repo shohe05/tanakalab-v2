@@ -170,6 +170,7 @@ class ArticleService implements ArticleServiceInterface
      */
     public function formatForShow($article)
     {
+        \Log::debug($article->comments);
         return [
             'id' => $article->id,
             'user_id' => $article->user->id,
@@ -194,6 +195,7 @@ class ArticleService implements ArticleServiceInterface
                 return [
                     'id' => $comment->id,
                     'user_id' => $comment->user_id,
+                    'user_image_url' => $comment->user->image_id,
                     'user_name' => $comment->user->name,
                     'body' => $comment->body,
                     'created_at' => $comment->created_at->format('Y-m-d H:i:s'),

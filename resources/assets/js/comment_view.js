@@ -7,6 +7,14 @@ var CommentView = {
      * @returns {string}
      */
     render: function(comment) {
-        return '<li>' + comment.body + ' by ' + comment.user_name + '</li>';
+        return '<li><img src="' + comment.user_image_url + '"><div class="right"><p class="author">' + comment.user_name + '</p><p class="body">' + comment.body + '</p></div></li>';
+    },
+
+    renderComments: function(comments) {
+        var dom = '';
+        for(var i=0; i<comments.length; i++) {
+            dom += this.render(comments[i]);
+        }
+        return dom;
     }
 };

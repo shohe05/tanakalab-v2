@@ -2,9 +2,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>{{ $title }} | Tanakalab</title>
+    <title>{{ isset($title) ? $title : '' }} | Tanakalab</title>
     <link rel="stylesheet" href="{{ elixir("css/app.css") }}">
     <link rel="stylesheet" href="{{ elixir("css/vendor.css") }}">
+    @yield('additionalCss')
     <script src="{{ elixir("js/vendor.js") }}"></script>
     <script src="{{ elixir("js/app.js") }}"></script>
     <script>
@@ -23,13 +24,13 @@
 <div id="nav">
     <ul id="nav-ul">
         <li>
-            <a href="#">
+            <a href="/article/create">
                 <i class="fa fa-pencil fa-2x"></i>
                 <p>NEW</p>
             </a>
         </li>
         <li class="current">
-            <a href="#">
+            <a href="/">
                 <i class="fa fa-home fa-2x"></i>
                 <p>HOME</p>
             </a>

@@ -39,15 +39,27 @@ var ArticleView = {
      * @private
      */
     _renderDetailTitle: function(article) {
-        var title = '<h1>' + article.title + '</h1>';
-        var tags = '<div>';
+        var dom = '<h1 id="article-title">' + article.title;
         $.each(article.tags, function () {
-            tags += '<span>' + this.name + '</span>';
+            dom += '<span class="tag">&nbsp;#' + this.name + '</span>';
         });
-        tags += '</div>';
-        var user = '<p>' + 'posted by ' + article.user_name + '</p>';
-        var created_at = '<p>' + 'posted at ' + article.created_at + '</p>';
-        return title + tags + user + created_at;
+
+        if (loginUser().id === article.user_id) {
+            dom += '<i id="edit-btn" class="fa fa-pencil"></i><i id="delete-btn" class="fa fa-trash"></i>';
+        }
+
+        dom += '</h1>';
+        dom += '<ul>';
+
+        var clip_count = this.clips == undefined ? 0 : this.clips.length;
+        dom += '<li class="star"><i class="fa fa-thumb-tack"></i>&nbsp;&nbsp;Clip <span class="star-count">' + clip_count + '</span></li>';
+
+        var comment_count = this.comments == undefined ? 0 : this.comments.length;
+        dom += '<li class="star"><i class="fa fa-comment"></i>&nbsp;&nbsp;Comment  <span class="star-count">' + comment_count + '</span></li>';
+
+        dom += '<li class="created">Created by ' + article.user_name + ' at ' + article.created_at + '</li>';
+        dom += '</ul>';
+        return dom;
     },
 
     /**

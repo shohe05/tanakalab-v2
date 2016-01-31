@@ -31,7 +31,7 @@
   padding: 0;
 }
 
-#article-header .fa-pencil, .fa-trash {
+#article-header .fa-pencil, #article-header .fa-trash {
   font-size: 20px;
   margin-left: 20px;
   color: grey;

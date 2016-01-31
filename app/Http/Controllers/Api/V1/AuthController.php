@@ -66,11 +66,12 @@ class AuthController extends V1Controller
 
     public function check(Request $request, \Tymon\JWTAuth\JWTAuth $auth)
     {
-        if (!$this->isLogin($request, $auth)) {
+        $user = $this->isLogin($request, $auth);
+        if (!$user) {
             return $this->apiResponse->unauthorized([]);
         }
 
-        return $this->apiResponse->success([]);
+        return $this->apiResponse->success($user);
     }
 
     private function isLogin(Request $request, \Tymon\JWTAuth\JWTAuth $auth)
@@ -91,7 +92,7 @@ class AuthController extends V1Controller
             return false;
         }
 
-        return true;
+        return $user;
     }
 
     public function logout()
