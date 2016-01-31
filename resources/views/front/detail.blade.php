@@ -27,6 +27,11 @@
 
 @section('additionalCss')
     <link rel="stylesheet" href="/css/github.css">
+    <style>
+        #content {
+            width: 800px;
+        }
+    </style>
 @stop
 @section('additionalJs')
     <script src="/js/highlight.pack.js"></script>

@@ -128,7 +128,7 @@ h1, h2, h3, p, span, li, pre {
 #article-list img {
   width: 64px;
   height: 64px;
-  border-radius: 64px;
+  border-radius: 7px;
   float:left
 }
 

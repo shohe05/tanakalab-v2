@@ -77,6 +77,7 @@ class ArticleService implements ArticleServiceInterface
                 'user_name' => $article->user->name,
                 'created_at' => $article->created_at->format('Y-m-d H:i:s'),
                 'updated_at' => $article->updated_at->format('Y-m-d H:i:s'),
+                'user_image_url' => $article->user->image_path,
                 'tags' => $article->tags->map(function($tag) {
                     return [
                         'id' => $tag->id,
@@ -175,6 +176,7 @@ class ArticleService implements ArticleServiceInterface
             'id' => $article->id,
             'user_id' => $article->user->id,
             'user_name' => $article->user->name,
+            'image_url' => $article->user->image_path,
             'title' => $article->title,
             'body' => $article->body,
             'created_at' => $article->created_at->format('Y-m-d H:i:s'),
@@ -195,7 +197,7 @@ class ArticleService implements ArticleServiceInterface
                 return [
                     'id' => $comment->id,
                     'user_id' => $comment->user_id,
-                    'user_image_url' => $comment->user->image_id,
+                    'user_image_url' => $comment->user->image_path,
                     'user_name' => $comment->user->name,
                     'body' => $comment->body,
                     'created_at' => $comment->created_at->format('Y-m-d H:i:s'),

@@ -20,22 +20,22 @@
     <input type="text" id="search-text-box" name="search_query" value="" placeholder="Search">
     <!-- </div> -->
 </header>
-
+<?php \Log::debug(Request::getPathInfo()); ?>
 <div id="nav">
     <ul id="nav-ul">
-        <li>
+        <li class="{{ Request::getPathInfo() == '/article/create' ? 'current' : '' }}">
             <a href="/article/create">
                 <i class="fa fa-pencil fa-2x"></i>
                 <p>NEW</p>
             </a>
         </li>
-        <li class="current">
+        <li class="{{ Request::getPathInfo() == '/' ? 'current' : '' }}">
             <a href="/">
                 <i class="fa fa-home fa-2x"></i>
                 <p>HOME</p>
             </a>
         </li>
-        <li>
+        <li class="{{ Request::getPathInfo() == '/tags' ? 'current' : '' }}">
             <a href="#">
                 <i class="fa fa-tag fa-2x"></i>
                 <p>TAGS</p>

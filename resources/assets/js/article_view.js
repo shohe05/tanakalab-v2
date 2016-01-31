@@ -12,7 +12,7 @@ var ArticleView = {
         $.each(articles, function() {
             var clip_length = this.clips === undefined ? 0 : this.clips.length;
             var comment_length = this.comments === undefined ? 0 : this.comments.length;
-            dom += '<li><img src="' + this.image_url + '" alt="" /><div class="right"><a href="' + ARTICLE_DETAIL_URL + this.id + '" class="article-link"><h2>' + this.title + '</h2></a><ul><li><i class="fa fa-thumb-tack"></i>&nbsp;&nbsp;' + clip_length +  '</li><li><i class="fa fa-comment"></i>&nbsp;&nbsp;' + comment_length +  '</li><li class="created">Created by ' + this.user_name + ' ' + this.created_at + ' </li></ul></div></li>';
+            dom += '<li><img src="' + this.user_image_url + '" alt="" /><div class="right"><a href="' + ARTICLE_DETAIL_URL + this.id + '" class="article-link"><h2>' + this.title + '</h2></a><ul><li><i class="fa fa-thumb-tack"></i>&nbsp;&nbsp;' + clip_length +  '</li><li><i class="fa fa-comment"></i>&nbsp;&nbsp;' + comment_length +  '</li><li class="created">Created by ' + this.user_name + ' ' + this.created_at + ' </li></ul></div></li>';
         });
         return dom;
     },
