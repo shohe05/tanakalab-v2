@@ -43,7 +43,11 @@ elixir(function(mix) {
     mix.styles([
         'index_common.css',
         'index_pc.css',
-        'index_sp.css'
+        'index_sp.css',
+        'detail_common.css',
+        'detail_sp.css',
+        'post_common.css',
+        'post_sp.css'
     ], 'public/css/app.css');
 
     // vendor.js

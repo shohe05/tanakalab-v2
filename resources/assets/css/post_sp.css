@@ -1,0 +1,10 @@
+@media screen and ( max-width:850px )
+{
+  #title-preview, #preview {
+    display: none;
+  }
+
+  #article-post-form {
+    width: 100%;
+  }
+}

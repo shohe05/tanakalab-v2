@@ -1,0 +1,5 @@
+@media screen and ( min-width:480px ) {
+  #article-header .created {
+    margin-top: 10px;
+  }
+}

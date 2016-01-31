@@ -25,19 +25,19 @@
       <li>
         <a href="#">
           <i class="fa fa-pencil fa-2x"></i>
-          <!-- <span>NEW</span> -->
+          <p>NEW</p>
         </a>
       </li>
       <li class="current">
         <a href="#">
           <i class="fa fa-home fa-2x"></i>
-          <!-- <span>HOME</span> -->
+          <p>HOME</p>
         </a>
       </li>
       <li>
         <a href="#">
           <i class="fa fa-tag fa-2x"></i>
-          <!-- <span>TAGS</span> -->
+          <p>TAGS</p>
         </a>
       </li>
     </ul>

@@ -1,0 +1,149 @@
+#article-title {
+  color: #3c4a60;
+  font-size: 40px;
+}
+
+#article-header {
+  border-bottom: 4px solid #e0e0e0;
+}
+
+#article-body pre {
+  font-size: 14px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+#article-body {
+  border-bottom: 4px solid #e0e0e0;
+}
+
+#article-title .tag {
+  color: #8d939f;
+  margin-left: 3px;
+  font-size: 24px;
+  /*font-style: italic;*/
+}
+
+#article-header ul {
+  height: 30px;
+  list-style-type: none;
+  padding: 0;
+}
+
+#article-header .fa-pencil, .fa-trash {
+  font-size: 20px;
+  margin-left: 20px;
+  color: grey;
+}
+
+#article-header .fa-pencil:hover, .fa-trash:hover {
+  color: #3c4a60;
+  cursor: pointer;
+}
+
+#article-header li {
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 0 20px;
+  float: left;
+}
+
+#article-header li {
+  color: grey;
+}
+
+#article-header .created {
+  color: grey;
+}
+
+#article-header img {
+  /*display: none;*/
+  width: 24px;
+  height: 24px;
+}
+
+#article-header li.star:hover {
+  color: #3c4a60;
+  cursor: pointer;
+}
+
+#article-header li span.star-count {
+  background: #e6e6e6;
+  padding: 2px 12px;
+  border-radius: 10px;
+  color: grey;
+  font-size: 12px;
+}
+
+#article-header li i {
+  color: #b8bcc4;
+}
+
+#comments {
+  padding: 0;
+  list-style-type: none;
+}
+
+#comments li {
+  margin-bottom: 20px;
+}
+
+#comments .author {
+  color: #519bb6;
+}
+
+#comments li img {
+  width: 64px;
+  height: 64px;
+  border-radius: 64px;
+  float:left;
+  margin-top: 5px;
+}
+
+#comments li .right {
+  background: #f4f4f4;
+  padding: 2px 20px;
+  border-radius: 7px;
+  margin-left: 75px;
+}
+
+#comments li .right p {
+  word-wrap: break-word;
+}
+
+#comments #post-form textarea {
+  width: 95%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  font-size: 14px;
+  padding: 6px 12px;
+  background: #d6d6d6;
+  border-radius: 7px;
+  margin-bottom: 8px;
+}
+
+#comments #post-form textarea:focus {
+  background: white;
+}
+
+#comments #post-form #submit-div {
+  height: 40px;
+}
+
+#comments #post-form #submit {
+  background: #519bb6;
+  padding: 10px 15px;
+  border-radius: 7px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  /*font-weight: bold;*/
+  float: right;
+  margin-right: 2%;
+}
+
+#comments #post-form #submit fa-check {
+  color: white;
+  /*font-size: 16px;*/
+}
