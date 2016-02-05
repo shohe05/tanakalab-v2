@@ -72,6 +72,12 @@ class ArticleService implements ArticleServiceInterface
         foreach ($articles as $article) {
             $data[]= [
                 'id' => $article->id,
+                'clips' => $article->clips->map(function($clip) {
+                    return [
+                        'user_id' => $clip->user->id,
+                        'user_name' => $clip->user->name,
+                    ];
+                }),
                 'title' => $article->title,
                 'user_id' => $article->user_id,
                 'user_name' => $article->user->name,

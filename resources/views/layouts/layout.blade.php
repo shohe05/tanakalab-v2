@@ -17,7 +17,8 @@
 <header id="header">
     <!-- <div id="search"> -->
     <i class="fa fa-search"></i>
-    <input type="text" id="search-text-box" name="search_query" value="" placeholder="Search">
+    <input type="text" id="search-text-box" name="query" value="" placeholder="Search">
+
     <!-- </div> -->
 </header>
 <?php \Log::debug(Request::getPathInfo()); ?>
@@ -29,10 +30,10 @@
                 <p>NEW</p>
             </a>
         </li>
-        <li class="{{ Request::getPathInfo() == '/' ? 'current' : '' }}">
+        <li class="{{ Request::getPathInfo() == '/' || preg_match('/\/article\/\d$/', Request::getPathInfo()) ? 'current' : '' }}">
             <a href="/">
-                <i class="fa fa-home fa-2x"></i>
-                <p>HOME</p>
+                <i class="fa fa-file-text fa-2x"></i>
+                <p>Articles</p>
             </a>
         </li>
         <li class="{{ Request::getPathInfo() == '/tags' ? 'current' : '' }}">
@@ -49,5 +50,14 @@
 </div>
 
 @yield('additionalJs')
+<script>
+    $('#search-text-box').on('keydown', function(e) {
+        if (e.keyCode !== 13) {
+            return null;
+        }
+        var query = $('#search-text-box').val();
+        location.href = ARTICLE_INDEX_URL + '?query=' + query
+    })
+</script>
 </body>
 </html>

@@ -28,16 +28,13 @@
 @section('additionalCss')
     <link rel="stylesheet" href="/css/github.css">
     <style>
-        #content {
-            width: 800px;
-        }
     </style>
 @stop
 @section('additionalJs')
     <script src="/js/highlight.pack.js"></script>
     <script>
         var id = location.pathname.split(ARTICLE_DETAIL_URL)[1];
-        $('#post-form').attr('src', loginUser().image_url);
+        $('#post-form img').attr('src', loginUser().image_path);
 
         Article.find(id).then(function(data) {
             var article = data.response;
@@ -53,6 +50,54 @@
             });
 
             $('#post-form').before(CommentView.renderComments(article.comments));
+
+            $('title').text(article.title + ' | Tanakalab');
+
+            // 削除
+            $('#delete-btn').on('click', function() {
+                if (!confirm('削除していいですか？')) {
+                    return null;
+                }
+                Article.delete(id).then(function() {
+                    location.href = (ARTICLE_INDEX_URL);
+                });
+            });
+
+            console.log(article);
+
+            // クリップ
+            $('#clip-btn').on('click', function() {
+                var alreadyClipped = false;
+                $.each(article.clips, function() {
+                    if (this.user_id === loginUser().id) {
+                        alreadyClipped = true;
+                    }
+                });
+                if (alreadyClipped) {
+                    Article.unclip(id).then(function() {
+                        var count = parseInt($('#clip-btn span.count').text());
+                        $('#clip-btn span.count').text(count - 1);
+                        for(var i=0; i<article.clips.length; i++) {
+                            if (article.clips[i].user_id === loginUser().id) {
+                                article.clips.splice(i, 1);
+                            }
+                        }
+                        $('#clip-label').text('Clip');
+                        $('#clip-btn').removeClass('active');
+                    });
+                } else {
+                    Article.clip(id).then(function() {
+                        var count = parseInt($('#clip-btn span.count').text());
+                        $('#clip-btn span.count').text(count + 1);
+                        article.clips.push({user_id: loginUser().id});
+                        $('#clip-label').text('Unclip');
+                        $('#clip-btn').addClass('active');
+                    });
+                }
+
+            })
+
+
         });
 
         // コメント投稿
@@ -60,9 +105,13 @@
             var body = $('#comments #post-form textarea[name=body]').val();
 
             Comment.post(id, body).then(function(data) {
-                var commentDom = CommentView.render(data.response);
+                var commentDom = CommentView.render($.extend(data.response, {user_image_url: loginUser().image_path}));
                 $('#post-form').before(commentDom);
+                var count = parseInt($('#comment-btn span.count').text());
+                $('#comment-btn span.count').text(count + 1);
             });
-        })
+        });
+
+
     </script>
 @stop

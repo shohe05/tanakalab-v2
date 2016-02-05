@@ -7,6 +7,7 @@ use App\Services\Contracts\ArticleServiceInterface as ArticleService;
 use Illuminate\Http\Request;
 use App\Http\ApiResponse\Contracts\ApiResponseInterface as ApiResponse;
 use Exception;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ArticleController extends V1Controller
 {
@@ -199,8 +200,10 @@ class ArticleController extends V1Controller
      */
     public function search(Request $request)
     {
+        /** @var LengthAwarePaginator $paginator */
         $paginator = $this->article->search($request, $request->get('page'), $request->get('perPage'));
         return $this->apiResponse->setMeta([
+            'current' => $paginator->currentPage(),
             'has_more_pages' => $paginator->hasMorePages(),
             'total' => $paginator->total(),
             'last_page' => $paginator->lastPage(),

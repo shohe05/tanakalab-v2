@@ -45,17 +45,25 @@ var ArticleView = {
         });
 
         if (loginUser().id === article.user_id) {
-            dom += '<i id="edit-btn" class="fa fa-pencil"></i><i id="delete-btn" class="fa fa-trash"></i>';
+            dom += '<a href="/article/' + article.id + '/edit"><i id="edit-btn" class="fa fa-pencil"></i></a></a><i id="delete-btn" class="fa fa-trash"></i>';
         }
 
         dom += '</h1>';
         dom += '<ul>';
 
-        var clip_count = this.clips == undefined ? 0 : this.clips.length;
-        dom += '<li class="star"><i class="fa fa-thumb-tack"></i>&nbsp;&nbsp;Clip <span class="star-count">' + clip_count + '</span></li>';
+        var clip_count = article.clips == undefined ? 0 : article.clips.length;
+        var alreadyClipped = false;
+        $.each(article.clips, function() {
+            if (this.user_id === loginUser().id) {
+                alreadyClipped = true;
+            }
+        });
+        var clip_label = alreadyClipped ? 'Unclip' : 'Clip';
+        var active = alreadyClipped ? ' active' : '';
+        dom += '<li class="star' + active + '" id="clip-btn"><i class="fa fa-thumb-tack"></i>&nbsp;&nbsp;<span id="clip-label">' + clip_label + '</span> <span class="star-count count">' + clip_count + '</span></li>';
 
-        var comment_count = this.comments == undefined ? 0 : this.comments.length;
-        dom += '<li class="star"><i class="fa fa-comment"></i>&nbsp;&nbsp;Comment  <span class="star-count">' + comment_count + '</span></li>';
+        var comment_count = article.comments == undefined ? 0 : article.comments.length;
+        dom += '<a href="#post-form"><li class="star" id="comment-btn"><i class="fa fa-comment"></i>&nbsp;&nbsp;Comment  <span class="star-count count">' + comment_count + '</span></li></a>';
 
         dom += '<li class="created">Created by ' + article.user_name + ' at ' + article.created_at + '</li>';
         dom += '</ul>';

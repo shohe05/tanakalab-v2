@@ -75,6 +75,10 @@
   font-size: 12px;
 }
 
+#article-header #clip-btn.active i {
+  color: #de8625;
+}
+
 #article-header li i {
   color: #b8bcc4;
 }

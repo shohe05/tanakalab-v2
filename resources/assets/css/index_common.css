@@ -11,6 +11,10 @@ h1, h2, h3, p, span, li, pre {
     color: #3c4a60;
 }
 
+#content {
+  width: 800px;
+}
+
 #nav {
   background: #45acc6;
 }
@@ -94,12 +98,13 @@ h1, h2, h3, p, span, li, pre {
   color: #808893;
   padding: 0 7px;
   padding-top: 3px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 #article-filter li a {
   text-decoration: none;
   color: #3c4a60;
+  font-size: 18px;
 }
 
 #article-list {
@@ -186,4 +191,15 @@ a.article-link {
 
 a.article-link:hover {
     color: #519bb6;
+}
+
+#more {
+  text-align: center;
+  background: #efefef;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+#more:hover {
+  background: rgba(0, 0, 0, 0.1);
 }

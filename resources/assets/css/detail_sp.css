@@ -1,5 +1,10 @@
-@media screen and ( min-width:480px ) {
-  #article-header .created {
-    margin-top: 10px;
+@media screen and ( max-width:480px ) {
+  #article-header {
+    padding-bottom: 30px;
   }
+
+  li.created {
+    margin-top: 20px;
+  }
+
 }

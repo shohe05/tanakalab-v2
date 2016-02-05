@@ -20,6 +20,11 @@ Route::get('/article/create', function () {
     return view('front.create');
 });
 
+// 編集画面
+Route::get('/article/{id}/edit', function () {
+    return view('front.create');
+});
+
 // 詳細画面
 Route::get('/article/{id}', function () {
     return view('front.detail');

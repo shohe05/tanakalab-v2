@@ -1,6 +1,10 @@
 /** スマホ用のスタイル **/
 @media screen and ( max-width:479px )
 {
+  #content {
+    width: 450px;
+  }
+
   #nav {
     position: absolute;
     top: 0;
@@ -57,7 +61,21 @@
     width: 290px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    margin-left: 0;
+    float: right;
   }
+
+  #article-list img {
+    width: 50px;
+    height: 50px;
+    /*float:left*/
+  }
+
+  /*#article-list .right {*/
+    /*margin-left: 15px;*/
+    /*float: left;*/
+    /*border-bottom: 1px solid rgba(0, 0, 0, 0.1);*/
+  /*}*/
 
   #article-list .created {
     display:none;

@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+<?php $title = 'New Article'; ?>
 
 @section('content')
     <div id="article-post-form">
@@ -9,7 +10,7 @@
         <span id="tag-form"></span>
         <a href="#" id="add-tag-form"><i class="fa fa-plus-circle"></i></a>
 
-        <textarea name="body" rows="20" placeholder="Input with Markdown!" required></textarea>
+        <textarea name="body" id="body" rows="20" placeholder="Input with Markdown!" required></textarea>
 
         <div id="submit-div">
             <a id="submit" type="submit"><i class="fa fa-check"></i>&nbsp;POST IT!</a>
@@ -48,6 +49,24 @@
             });
             $('#add-tag-form').click();
 
+            // 編集の場合
+            if (location.pathname.match(/\/article\/\d+\/edit/)) {
+                var id = location.pathname.match(/\d+/)[0];
+                Article.find(id).then(function(data) {
+                    var article = data.response;
+                    $('#title').val(article.title);
+                    $('#body').val(article.body);
+                    $.each(article.tags, function() {
+                        console.log(this.name);
+                        $('.tag:last-child').val(this.name);
+                        $('#add-tag-form').trigger('click');
+                    });
+
+                    $('#article-post-form #title').keyup();
+                    $('#article-post-form textarea').keyup();
+                });
+            }
+
             // 投稿
             $('#article-post-form #submit').on('click', function(){
                 var title = $('#article-post-form input[name=title]').val();
@@ -60,9 +79,15 @@
                     tags.push($(this).val());
                 });
 
-                Article.post(title, body, tags).then(function(data) {
-                    location.href = ARTICLE_DETAIL_URL + data.response.id;
-                });
+                if (location.pathname == '/article/create') {
+                    Article.post(title, body, tags).then(function(data) {
+                        location.href = ARTICLE_DETAIL_URL + data.response.id;
+                    });
+                } else {
+                    Article.edit(id, title, body, tags).then(function(data) {
+                        location.href = ARTICLE_DETAIL_URL + data.response.id;
+                    });
+                }
             })
         })
     </script>
