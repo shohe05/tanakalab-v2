@@ -7,4 +7,13 @@
     margin-top: 20px;
   }
 
+  #clip-div {
+    margin-top: 50px;
+    width: 90%;
+  }
+
+  #clip-link {
+    width: 100%;
+  }
+
 }

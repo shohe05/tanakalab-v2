@@ -66,7 +66,7 @@ var ArticleView = {
         dom += '<a href="#post-form"><li class="star" id="comment-btn"><i class="fa fa-comment"></i>&nbsp;&nbsp;Comment  <span class="star-count count">' + comment_count + '</span></li></a>';
 
         dom += '<li class="created">Created by ' + article.user_name + ' at ' + article.created_at + '</li>';
-        dom += '</ul>';
+        dom += '</ul><div id="clip-div"><span id="clip-link">Clip it!</span></div>';
         return dom;
     },
 

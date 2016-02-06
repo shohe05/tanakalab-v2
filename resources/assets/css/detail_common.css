@@ -4,6 +4,7 @@
 }
 
 #article-header {
+  padding-bottom: 20px;
   border-bottom: 4px solid #e0e0e0;
 }
 
@@ -150,4 +151,17 @@
 #comments #post-form #submit fa-check {
   color: white;
   /*font-size: 16px;*/
+}
+
+#clip-div {
+  /*background: grey;*/
+}
+
+#clip-link {
+  background: grey;
+  padding: 5px 25px;
+  height: 50px;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
 }

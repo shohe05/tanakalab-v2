@@ -69,7 +69,7 @@
             console.log(article);
 
             // クリップ
-            $('#clip-btn').on('click', function() {
+            $('#clip-link').on('click', function() {
                 var alreadyClipped = false;
                 $.each(article.clips, function() {
                     if (this.user_id === loginUser().id) {
@@ -85,7 +85,7 @@
                                 article.clips.splice(i, 1);
                             }
                         }
-                        $('#clip-label').text('Clip');
+                        $('#clip-link').text('Clip it!');
                         $('#clip-btn').removeClass('active');
                     });
                 } else {
@@ -93,7 +93,7 @@
                         var count = parseInt($('#clip-btn span.count').text());
                         $('#clip-btn span.count').text(count + 1);
                         article.clips.push({user_id: loginUser().id});
-                        $('#clip-label').text('Unclip');
+                        $('#clip-link').text('Unclip');
                         $('#clip-btn').addClass('active');
                     });
                 }

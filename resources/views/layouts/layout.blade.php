@@ -21,7 +21,8 @@
 
     <ul id="right">
         <li class="login-user"><img src="" alt="" width="45" height="45"></li>
-        <ul id="head-dropdown" style="display: none;"><li id="logout-link">Logout</li></ul>
+        <ul id="head-dropdown"><li id="logout-link">Logout</li></ul>
+        {{--<ul id="head-dropdown" style="display: none;"><li id="logout-link">Logout</li></ul>--}}
     </ul>
     <!-- </div> -->
 </header>
@@ -62,7 +63,6 @@
         var user = null;
         function getLoginUser() {
             user = loginUser();
-            console.log('aaaaaaaaaaaaaaaa');
             check();
         }
 
