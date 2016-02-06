@@ -9,6 +9,7 @@ Thumbs.db
 _ide_helper*
 resources/assets/vendor/
 public/css/
-public/js/
+public/js/*
+!public/js/highlight.pack.js
 public/build/*
 !public/build/fonts
