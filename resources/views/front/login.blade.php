@@ -3,12 +3,14 @@
     <link rel="stylesheet" href="{{ elixir("css/login.css") }}">
 </head>
 <body>
-<div id="login-form">
-        <input type='text' id='email'>
-        <input type='password' id='password'>
-        <input type='submit' id='submit' value='ログイン'>
+<div id="container">
+    <div id="login-form">
+        <h2>Login Tanakalab</h2>
+        <input type='text' id='email' placeholder="Email">
+        <input type='password' id='password' placeholder="Password">
+        <input type='submit' id='submit' value='Login'>
+    </div>
 </div>
-
 <script src="{{ elixir("js/vendor.js") }}"></script>
 <script src="{{ elixir("js/app.js") }}"></script>
 <script>
