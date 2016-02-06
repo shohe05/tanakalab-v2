@@ -19,6 +19,7 @@
 
   #content {
     width: 450px;
+    margin-left: 0!important;
   }
 
   #nav {

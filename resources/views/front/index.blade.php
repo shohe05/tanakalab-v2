@@ -9,7 +9,7 @@
 
   <div id="article-filter">
     <ul>
-      <li id="all"><a href="#">All <span class="count"></span></a></li>
+      <li id="all" class="active"><a href="#">All <span class="count"></span></a></li>
       <li id="clips"><a href="#"><i class="fa fa-thumb-tack"></i> Clips <span class="count"></span></a></li>
       <li id="you"><a href="#"><i class="fa fa-user"></i> You <span class="count"></span></a></li>
     </ul>

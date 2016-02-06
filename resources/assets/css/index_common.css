@@ -131,6 +131,10 @@ h1, h2, h3, p, span, li, pre {
   outline:none;
 }
 
+#content {
+  margin-left: 120px !important;
+}
+
 #article-filter ul {
   list-style-type: none;
   padding: 0;
@@ -140,6 +144,10 @@ h1, h2, h3, p, span, li, pre {
   border-left: 1px solid rgba(0, 0, 0, 0.05);
   padding-left: 10px;
   float: left;
+}
+
+#article-filter li.active a {
+  color: #3c4a60;
 }
 
 #article-filter li:not(:first-child) {
@@ -159,6 +167,7 @@ h1, h2, h3, p, span, li, pre {
   text-decoration: none;
   color: #3c4a60;
   font-size: 18px;
+  color: #519bb6;
 }
 
 #article-list {
