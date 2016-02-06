@@ -30,6 +30,11 @@ Route::get('/article/{id}', function () {
     return view('front.detail');
 });
 
+// タグ一覧画面
+Route::get('/tags', function () {
+    return view('front.tags');
+});
+
 /**
  * API
  */
@@ -69,6 +74,8 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function() {
         Route::put('comments/{comment}/update', ['as' => 'api.v1.comments.update', 'uses' => 'CommentController@update']);
         // コメント削除
         Route::delete('comments/{comment}/delete', ['as' => 'api.v1.comments.delete', 'uses' => 'CommentController@delete']);
+        // タグ一覧
+        Route::get('tags', ['as' => 'api.v1.tag.index', 'uses' => 'ArticleController@tags']);
     });
 });
 

@@ -1,5 +1,5 @@
 #content {
-  max-width: 1200px;
+  max-width: 1400px;
   height: 1000px;
 }
 
@@ -69,7 +69,7 @@
   cursor: pointer;
   /*font-weight: bold;*/
   float: right;
-  margin-right: 5%;
+  margin-right: 10%;
 }
 
 #article-post-form #submit fa-check {
@@ -78,12 +78,12 @@
 }
 
 #title-preview {
-  border-bottom: 4px solid #e0e0e0;
-  float: right;
-  width: 50%;
-  margin: 0;
-  padding: 0;
-  height: 70px;
+  /*border-bottom: 4px solid #e0e0e0;*/
+  /*float: right;*/
+  /*width: 50%;*/
+  /*margin: 0;*/
+  /*padding: 0;*/
+  /*height: 70px;*/
 }
 
 #preview {

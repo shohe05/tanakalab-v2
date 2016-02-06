@@ -274,9 +274,14 @@ class ArticleService implements ArticleServiceInterface
     {
         $queries = preg_split('/[\s|\x{3000}]+/u', $request->get('query'));
         $model = App::make(Article::class);
-        if (!is_null($request->get('clip_by', null))) {
+        if (!empty($request->get('clip_by', null))) {
             $model = $model->whereHas('clips', function($clip) use ($request) {
                 $clip->where('user_id', $request->get('clip_by'));
+            });
+        }
+        if (!empty($request->get('tag', null))) {
+            $model = $model->whereHas('tags', function($tag) use ($request) {
+                $tag->where('name', $request->get('tag'));
             });
         }
         foreach ($queries as $query) {

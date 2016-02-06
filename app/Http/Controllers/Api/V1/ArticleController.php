@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\V1Controller;
+use App\Repositories\Contracts\TagRepositoryInterface as TagRepository;
 use App\Services\Contracts\ArticleServiceInterface as ArticleService;
 use Illuminate\Http\Request;
 use App\Http\ApiResponse\Contracts\ApiResponseInterface as ApiResponse;
@@ -209,5 +210,10 @@ class ArticleController extends V1Controller
             'last_page' => $paginator->lastPage(),
             'per_page' => $paginator->count(),
         ])->success($this->article->formatForIndex($paginator->items()));
+    }
+
+    public function tags(TagRepository $tagRepository)
+    {
+        return $this->apiResponse->success($tagRepository->all());
     }
 }

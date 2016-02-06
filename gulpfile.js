@@ -50,6 +50,11 @@ elixir(function(mix) {
         'post_sp.css'
     ], 'public/css/app.css');
 
+    // login.css
+    mix.styles([
+        'login.css'
+    ], 'public/css/login.css');
+
     // vendor.js
     mix.scripts([
         'jquery/dist/jquery.min.js',
@@ -76,7 +81,8 @@ elixir(function(mix) {
         'public/js/app.js',
         'public/js/vendor.js',
         'public/css/vendor.css',
-        'public/css/app.css'
+        'public/css/app.css',
+        'public/css/login.css'
     ]);
 
 

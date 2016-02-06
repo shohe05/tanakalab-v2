@@ -11,6 +11,7 @@ const EDIT_ARTICLE_API_URL = function(article_id) { return _API_BASE_URL + '/art
 const DELETE_ARTICLE_API_URL = function(article_id) { return _API_BASE_URL + '/articles/' + article_id + '/delete' };
 const CLIP_ARTICLE_API_URL = function(article_id) { return _API_BASE_URL + '/articles/' + article_id + '/clip' };
 const UNCLIP_ARTICLE_API_URL = function(article_id) { return _API_BASE_URL + '/articles/' + article_id + '/unclip' };
+const GET_TAG_API_URL = _API_BASE_URL + '/tags';
 
 // フロントアプリのURL
 const LOGIN_URL = '/login';

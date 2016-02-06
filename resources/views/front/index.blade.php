@@ -23,6 +23,13 @@
 @stop
 
 @section('additionalCss')
+  <style>
+    @media screen and ( min-width:480px ) {
+      #content {
+        width: 800px;
+      }
+    }
+  </style>
 @stop
 
 @section('additionalJs')
@@ -30,7 +37,7 @@
     $(function() {
       var query = decodeURI(getQueryVariable('query'));
       $('#search-text-box').val(query);
-      Article.search(query, 1).then(function(data) {
+      Article.search(location.search, 1).then(function(data) {
         var articles = data.response;
         renderArticles(articles);
 
@@ -83,11 +90,8 @@
         var clippedArticles = [];
         $.each(articles, function () {
           var self = this;
-          console.log(this);
           $.each(self.clips, function() {
-            console.log(this);
             if (this.user_id === loginUser().id) {
-              console.log('same');
               clippedArticles.push(self);
             }
           })

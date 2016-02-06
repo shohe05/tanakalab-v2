@@ -28,6 +28,9 @@
 @section('additionalCss')
     <link rel="stylesheet" href="/css/github.css">
     <style>
+        #content {
+            max-width: 1000px;
+        }
     </style>
 @stop
 @section('additionalJs')

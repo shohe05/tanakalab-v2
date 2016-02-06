@@ -99,7 +99,7 @@
 #comments li img {
   width: 64px;
   height: 64px;
-  border-radius: 64px;
+  border-radius: 7px;
   float:left;
   margin-top: 5px;
 }
@@ -137,14 +137,14 @@
 
 #comments #post-form #submit {
   background: #519bb6;
-  padding: 10px 15px;
+  padding: 13px 22px;
   border-radius: 7px;
   color: white;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   /*font-weight: bold;*/
   float: right;
-  margin-right: 2%;
+  margin-right: 5%;
 }
 
 #comments #post-form #submit fa-check {

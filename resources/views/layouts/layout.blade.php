@@ -19,6 +19,10 @@
     <i class="fa fa-search"></i>
     <input type="text" id="search-text-box" name="query" value="" placeholder="Search">
 
+    <ul id="right">
+        <li class="login-user"><img src="" alt="" width="45" height="45"></li>
+        <ul id="head-dropdown" style="display: none;"><li id="logout-link">Logout</li></ul>
+    </ul>
     <!-- </div> -->
 </header>
 <?php \Log::debug(Request::getPathInfo()); ?>
@@ -30,18 +34,19 @@
                 <p>NEW</p>
             </a>
         </li>
-        <li class="{{ Request::getPathInfo() == '/' || preg_match('/\/article\/\d$/', Request::getPathInfo()) ? 'current' : '' }}">
+        <li class="{{ Request::getPathInfo() == '/' || preg_match('/\/article\/\d+$/', Request::getPathInfo()) ? 'current' : '' }}">
             <a href="/">
                 <i class="fa fa-file-text fa-2x"></i>
                 <p>Articles</p>
             </a>
         </li>
         <li class="{{ Request::getPathInfo() == '/tags' ? 'current' : '' }}">
-            <a href="#">
+            <a href="/tags">
                 <i class="fa fa-tag fa-2x"></i>
                 <p>TAGS</p>
             </a>
         </li>
+        <li id="right" class="login-user"><img src="" alt="" width="45" height="45"></li>
     </ul>
 </div>
 
@@ -51,13 +56,42 @@
 
 @yield('additionalJs')
 <script>
-    $('#search-text-box').on('keydown', function(e) {
-        if (e.keyCode !== 13) {
-            return null;
+
+    $(function() {
+
+        var user = null;
+        function getLoginUser() {
+            user = loginUser();
+            console.log('aaaaaaaaaaaaaaaa');
+            check();
         }
-        var query = $('#search-text-box').val();
-        location.href = ARTICLE_INDEX_URL + '?query=' + query
-    })
+
+        function check() {
+            if (user !== null) {
+                clearInterval(interval);
+                $('.login-user img').attr('src', user.image_path);
+
+                $('.login-user').on('click', function() {
+                    $("#head-dropdown").toggle();
+                });
+
+                $('#logout-link').on('click', function() {
+                    logout();
+                });
+            }
+            return true;
+        }
+        var interval = setInterval(getLoginUser, 1);
+
+        $('#search-text-box').on('keydown', function(e) {
+            if (e.keyCode !== 13) {
+                return null;
+            }
+            var query = $('#search-text-box').val();
+
+            location.href = ARTICLE_INDEX_URL + '?query=' + encodeURI(query);
+        });
+    });
 </script>
 </body>
 </html>

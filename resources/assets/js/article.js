@@ -16,7 +16,23 @@ var Article = {
 
     search: function(query, page) {
         var deferred = $.Deferred();
-        _callAuthApi('GET', SEARCH_ARTICLE_API_URL, {query: query, page: page, perPage: 5}, function(data) {
+        query = decodeURI(query).replace(/　/g," ").replace('/tag:/', 'tag=').replace(/^\?query=/, '');
+        var values = query.split(' ');
+        var q = [];
+        var tag = '';
+        console.log(values);
+        $.each(values, function() {
+            if (this.match(/^tag:/)) {
+                console.log('tag');
+                tag = this;
+            } else {
+                q.push(this);
+            }
+        });
+        console.log(tag);
+        console.log(q);
+
+        _callAuthApi('GET', SEARCH_ARTICLE_API_URL, {query: q.join(' '), tag: tag.replace(/tag:/, ''), page: page, perPage: 10}, function(data) {
             deferred.resolve(data);
         });
         return deferred.promise();
@@ -71,6 +87,14 @@ var Article = {
     unclip: function (id) {
         var deferred = $.Deferred();
         _callAuthApi('DELETE', UNCLIP_ARTICLE_API_URL(id), null, function(data) {
+            deferred.resolve(data);
+        });
+        return deferred.promise();
+    },
+
+    tags: function () {
+        var deferred = $.Deferred();
+        _callAuthApi('GET', GET_TAG_API_URL, null, function(data) {
             deferred.resolve(data);
         });
         return deferred.promise();

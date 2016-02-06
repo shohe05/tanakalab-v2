@@ -1,6 +1,18 @@
 /** スマホ用のスタイル **/
 @media screen and ( max-width:479px )
 {
+  #header #right {
+    display: none;
+  }
+
+  #nav #right {
+    display: block;
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    margin: 0;
+  }
+
   #content {
     width: 450px;
   }

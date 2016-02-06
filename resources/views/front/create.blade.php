@@ -17,26 +17,36 @@
         </div>
     </div>
 
-    <div id="title-preview">
-    </div>
+    {{--<div id="title-preview">--}}
+    {{--</div>--}}
     <div id="preview">
     </div>
 @stop
 
 @section('additionalCss')
     <link rel="stylesheet" href="/css/github.css">
+    <style>
+        #content {
+            padding-right: 20px;
+        }
+
+        #title-preview {
+            /*padding-bottom: 30px;*/
+        }
+    </style>
 @stop
 @section('additionalJs')
     <script src="/js/highlight.pack.js"></script>
     <script>
         $(function() {
+            var html = '';
             // プレビュー
             $('#article-post-form #title').keyup(function() {
-                var html = '<h1>' + $(this).val() + '</h1>';
-                $('#title-preview').html(html);
+                var html = '<h1>' + $('#article-post-form #title').val() + '</h1><hr>' + marked($('#article-post-form textarea').val());
+                $('#preview').html(html);
             });
             $('#article-post-form textarea').keyup(function() {
-                var html = marked($(this).val());
+                var html = '<h1>' + $('#article-post-form #title').val() + '</h1><hr>' + marked($('#article-post-form textarea').val());
                 $('#preview').html(html);
                 $('#preview pre code').each(function(i, e) {
                     hljs.highlightBlock(e, e.className);

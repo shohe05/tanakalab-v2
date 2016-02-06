@@ -11,10 +11,6 @@ h1, h2, h3, p, span, li, pre {
     color: #3c4a60;
 }
 
-#content {
-  width: 800px;
-}
-
 #nav {
   background: #45acc6;
 }
@@ -68,6 +64,63 @@ h1, h2, h3, p, span, li, pre {
   transition: all 0.2s ease-out 0s;
   background: #a1c6cc;
   color: grey;
+}
+
+#header #right {
+  position: absolute;
+  top: 3px;
+  right: 100px;
+  color: #a3a197;
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+}
+
+.login-user {
+  cursor: pointer;
+}
+
+#header #right li {
+  float: left;
+  display: block;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+}
+
+#nav #right {
+  display: none;
+}
+
+#head-dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: 150px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 2px ridge rgba(0, 0, 0, 0.1);
+  border-bottom: 2px ridge rgba(0, 0, 0, 0.1);
+  padding: 0;
+  margin: 0;
+}
+
+#head-dropdown li {
+  padding: 10px 30px;
+  cursor: pointer;
+  width: 92px;
+}
+
+#head-dropdown li:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+#logout {
+  position: absolute;
+  top: 20px;
+}
+
+#header #right li a{
+  display: block;
 }
 
 #search-text-box:focus {

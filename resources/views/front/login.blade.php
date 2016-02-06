@@ -1,10 +1,12 @@
 <html>
-<head></head>
+<head>
+    <link rel="stylesheet" href="{{ elixir("css/login.css") }}">
+</head>
 <body>
-<div>
-    <input type='text' id='email'>
-    <input type='password' id='password'>
-    <input type='submit' id='submit' value='ログイン'>
+<div id="login-form">
+        <input type='text' id='email'>
+        <input type='password' id='password'>
+        <input type='submit' id='submit' value='ログイン'>
 </div>
 
 <script src="{{ elixir("js/vendor.js") }}"></script>

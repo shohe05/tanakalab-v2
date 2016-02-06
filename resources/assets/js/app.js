@@ -3,7 +3,8 @@
  */
 function redirectIfNotLogin() {
     var header = {
-        Authorization: 'Bearer' + localStorage.getItem('token')
+        Authorization: 'Bearer' + localStorage.getItem('token'),
+        async:false
     };
 
     _ajax(_makeAjaxOption('GET', CHECK_LOGIN_API_URL, {}, header), function(res) {
@@ -15,6 +16,12 @@ function redirectIfNotLogin() {
 
 function loginUser() {
     return JSON.parse(localStorage.getItem('loginUser'));
+}
+
+function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('loginUser');
+    location.href = LOGIN_URL;
 }
 
 /**
