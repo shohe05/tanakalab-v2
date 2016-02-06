@@ -9,7 +9,7 @@
 
   <div id="article-filter">
     <ul>
-      <li id="all" class="active"><a href="#">All <span class="count"></span></a></li>
+      <li id="all"><a href="#">All <span class="count"></span></a></li>
       <li id="clips"><a href="#"><i class="fa fa-thumb-tack"></i> Clips <span class="count"></span></a></li>
       <li id="you"><a href="#"><i class="fa fa-user"></i> You <span class="count"></span></a></li>
     </ul>
@@ -63,21 +63,28 @@
         $('#article-filter #all span').text(articles.length);
         $('#article-filter #clips span').text(clippedArticles(articles).length);
         $('#article-filter #you span').text(ownedArticles(articles).length);
-
         // article-filter all
         $('#article-filter #all').on('click', function() {
           renderArticles(articles);
+          removeActive();
+          $('#article-filter #all').addClass('active');
         });
 
         // article-filter clips
         $('#article-filter #clips').on('click', function() {
           renderArticles(clippedArticles(articles));
+          removeActive();
+          $('#article-filter #clips').addClass('active');
         });
 
         // article-filter you
         $('#article-filter #you').on('click', function() {
           renderArticles(ownedArticles(articles));
+          removeActive();
+          $('#article-filter #you').addClass('active');
         });
+        $('#article-filter #all').trigger('click');
+
       });
 
       function renderArticles(articles) {
@@ -107,6 +114,12 @@
           }
         });
         return ownedArticles;
+      }
+
+      function removeActive() {
+        $('#article-filter #all').removeClass('active');
+        $('#article-filter #clips').removeClass('active');
+        $('#article-filter #you').removeClass('active');
       }
 
     })
