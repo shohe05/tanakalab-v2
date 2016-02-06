@@ -160,7 +160,6 @@ return [
          * Additional Service Providers...
          */
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         App\Repositories\RepositoryServiceProvider::class,
 //        GrahamCampbell\Markdown\MarkdownServiceProvider::class,
@@ -168,6 +167,7 @@ return [
         App\Http\ApiResponse\ApiResponseServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
+        App\Providers\LocalServiceProvider::class,
     ],
 
     /*
