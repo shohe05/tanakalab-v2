@@ -5,7 +5,6 @@
     </div>
 
     <div id="article-body">
-        <pre></pre>
     </div>
 
     <div id="content-title">
@@ -44,7 +43,7 @@
             var articleDom = ArticleView.renderDetail(article);
 
             $('#article-header').append(articleDom.title);
-            $('#article-body>pre').append(articleDom.body);
+            $('#article-body').append(articleDom.body);
 
             //TODO: ハイライト系のコードはメソッドに切り出す
             hljs.initHighlightingOnLoad();
