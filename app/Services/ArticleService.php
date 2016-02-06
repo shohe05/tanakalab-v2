@@ -290,6 +290,6 @@ class ArticleService implements ArticleServiceInterface
             });
         }
         $perPage = !is_null($perPage) ? $perPage : config('pagination.perPage');
-        return $model->paginate($perPage, ['*'], 'page', $page)->appends($request->all());
+        return $model->orderBy('updated_at', 'desc')->paginate($perPage, ['*'], 'page', $page)->appends($request->all());
     }
 }
