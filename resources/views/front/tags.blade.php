@@ -18,9 +18,8 @@
         $(function() {
             Article.tags().then(function(data) {
                 var tags = data.response;
-                console.dir(tags);
                 $.each(tags, function() {
-                    $('#tags').append('<li><a href="/" style="font-size: 22px;">' + this.name + '</a></li>')
+                    $('#tags').append('<li><a href="/?query=tag:' + this.name + '" style="font-size: 22px;">' + this.name + '</a></li>')
                 })
             });
         });
