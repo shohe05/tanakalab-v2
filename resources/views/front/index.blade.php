@@ -26,7 +26,7 @@
   <style>
     @media screen and ( min-width:480px ) {
       #content {
-        width: 800px;
+        width: 1000px;
       }
     }
   </style>
