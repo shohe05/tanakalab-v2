@@ -1,6 +1,5 @@
 #content {
   max-width: 1400px;
-  height: 1000px;
 }
 
 #article-post-form {
@@ -13,6 +12,7 @@
   padding: 0;
   border: none;
   resize: none;
+  margin-bottom: 100px;
 }
 
 #article-post-form input#title {
