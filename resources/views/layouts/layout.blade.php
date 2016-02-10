@@ -26,7 +26,6 @@
     </ul>
     <!-- </div> -->
 </header>
-<?php \Log::debug(Request::getPathInfo()); ?>
 <div id="nav">
     <ul id="nav-ul">
         <li class="{{ Request::getPathInfo() == '/article/create' ? 'current' : '' }}">
@@ -51,7 +50,8 @@
     </ul>
 </div>
 
-<div id="content">
+<div id="loading"><img src="/img/loading.gif"></div>
+<div id="content" style="display:none;">
     @yield('content')
 </div>
 

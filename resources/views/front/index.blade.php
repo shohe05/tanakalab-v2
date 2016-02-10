@@ -39,6 +39,8 @@
       $('#search-text-box').val(query);
       Article.search(location.search, 1).then(function(data) {
         var articles = data.response;
+        $('#loading').hide();
+        $('#content').show();
         renderArticles(articles);
 
         if (data.meta.has_more_pages) {

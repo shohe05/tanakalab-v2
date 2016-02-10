@@ -39,6 +39,8 @@
     <script src="/js/highlight.pack.js"></script>
     <script>
         $(function() {
+            $('#loading').hide();
+            $('#content').show();
             var html = '';
             // プレビュー
             $('#article-post-form #title').keyup(function() {

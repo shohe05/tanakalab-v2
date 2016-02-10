@@ -42,8 +42,13 @@
             var article = data.response;
             var articleDom = ArticleView.renderDetail(article);
 
+            // $('#article-header').show();
+            // $('#article-body').show();
             $('#article-header').append(articleDom.title);
             $('#article-body').append(articleDom.body);
+            // $('#content-title').show();
+            $('#loading').hide();
+            $('#content').show();
 
             //TODO: ハイライト系のコードはメソッドに切り出す
             hljs.initHighlightingOnLoad();
