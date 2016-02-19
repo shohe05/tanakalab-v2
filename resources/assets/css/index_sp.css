@@ -96,12 +96,6 @@
     /*float:left*/
   }
 
-  /*#article-list .right {*/
-    /*margin-left: 15px;*/
-    /*float: left;*/
-    /*border-bottom: 1px solid rgba(0, 0, 0, 0.1);*/
-  /*}*/
-
   #article-list .created {
     display:none;
   }
