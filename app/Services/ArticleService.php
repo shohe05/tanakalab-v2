@@ -7,11 +7,13 @@ use App\Repositories\Contracts\ArticleRepositoryInterface as ArticleRepository;
 use App\Repositories\Contracts\TagRepositoryInterface as TagRepository;
 use App\Repositories\Criteria\ArticleRepositoryGetArticlesStockedBySpecifiedUserIdCriteria;
 use App\Services\Contracts\ArticleServiceInterface;
+use App\Services\Contracts\NotifySlackServiceInterface;
 use DB;
 use Illuminate\Http\Request;
 use Validator;
 use App\Repositories\Contracts\ClipRepositoryInterface as ClipRepository;
 use App;
+use App\Services\Contracts\NotifySlackServiceInterface as NotifySlack;
 
 class ArticleService implements ArticleServiceInterface
 {
@@ -31,6 +33,8 @@ class ArticleService implements ArticleServiceInterface
      */
     protected $clipRepository;
 
+    protected $notifySlack;
+
     /**
      * ArticleService constructor.
      * @param ArticleRepository $articleRepository
@@ -38,12 +42,13 @@ class ArticleService implements ArticleServiceInterface
      * @param ClipRepository $clipRepository
      * @param Request $request
      */
-    public function __construct(ArticleRepository $articleRepository, TagRepository $tagRepository, ClipRepository $clipRepository, Request $request)
+    public function __construct(ArticleRepository $articleRepository, TagRepository $tagRepository, ClipRepository $clipRepository, Request $request, NotifySlack $notifySlack)
     {
         $this->articleRepository = $articleRepository;
         $this->tagRepository = $tagRepository;
         $this->clipRepository = $clipRepository;
         $this->request = $request;
+        $this->notifySlack = $notifySlack;
     }
 
     /**
@@ -142,6 +147,9 @@ class ArticleService implements ArticleServiceInterface
                 $tags = $this->tagRepository->firstOrCreateByNames($tag_input);
                 $article->syncTags($tags);
             }
+
+            $this->notifySlack->notifyArticleCreated($article);
+
             return $article;
         });
     }
@@ -159,6 +167,7 @@ class ArticleService implements ArticleServiceInterface
                 $tags = $this->tagRepository->firstOrCreateByNames($tag_input);
                 $article->syncTags($tags);
             }
+            $this->notifySlack->notifyArticleUpdated($article);
         });
     }
 

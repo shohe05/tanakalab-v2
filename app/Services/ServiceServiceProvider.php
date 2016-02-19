@@ -10,6 +10,7 @@ class ServiceServiceProvider extends ServiceProvider {
         'Article',
         'User',
         'Comment',
+        'NotifySlack',
     ];
 
     /**

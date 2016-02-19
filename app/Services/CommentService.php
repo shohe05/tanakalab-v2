@@ -4,7 +4,9 @@ namespace App\Services;
 
 use App\Repositories\Contracts\CommentRepositoryInterface as CommentRepository;
 use App\Services\Contracts\CommentServiceInterface;
+use App\Services\Contracts\NotifySlackServiceInterface;
 use Validator;
+use App\Services\Contracts\NotifySlackServiceInterface as NotifySlack;
 
 class CommentService implements CommentServiceInterface
 {
@@ -14,13 +16,16 @@ class CommentService implements CommentServiceInterface
      */
     protected $commentRepository;
 
+    protected $notifySlack;
+
     /**
      * CommentService constructor.
      * @param CommentRepository $commentRepository
      */
-    public function __construct(CommentRepository $commentRepository)
+    public function __construct(CommentRepository $commentRepository, NotifySlack $notifySlack)
     {
         $this->commentRepository = $commentRepository;
+        $this->notifySlack = $notifySlack;
     }
 
     /**
@@ -43,7 +48,9 @@ class CommentService implements CommentServiceInterface
     public function create($user_id, $article_id, $input)
     {
         $input = array_merge($input, ['article_id' => $article_id, 'user_id' => $user_id]);
-        return $this->commentRepository->create($input);
+        $comment = $this->commentRepository->create($input);
+        $this->notifySlack->notifyCommentCreated($comment);
+        return $comment;
     }
 
     /**
@@ -53,8 +60,6 @@ class CommentService implements CommentServiceInterface
      */
     public function update($id, $input)
     {
-        \Log::debug($id);
-        \Log::debug($input);
         return $this->commentRepository->update($input, $id);
     }
 
