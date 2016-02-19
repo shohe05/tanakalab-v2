@@ -113,6 +113,7 @@
 
             Comment.post(id, body).then(function(data) {
                 var commentDom = CommentView.render($.extend(data.response, {user_image_url: loginUser().image_path}));
+                $('#comments #post-form textarea[name=body]').val("");
                 $('#post-form').before(commentDom);
                 var count = parseInt($('#comment-btn span.count').text());
                 $('#comment-btn span.count').text(count + 1);
