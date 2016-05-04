@@ -36,9 +36,9 @@ sudo make install >/dev/null 2>&1
 ;send -- \"vagrant\n\"
 ;'
 
-echo 'Apply oh-my-zsh'
-sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)" >/dev/null 2>&1
-sudo sed -i -e 's/ZSH_THEME="robbyrussell"/ZSH_THEME="steeef"/g' ~/.zshrc >/dev/null 2>&1
+;echo 'Apply oh-my-zsh'
+;sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)" >/dev/null 2>&1
+;sudo sed -i -e 's/ZSH_THEME="robbyrussell"/ZSH_THEME="steeef"/g' ~/.zshrc >/dev/null 2>&1
 
 echo 'Install PHP5.6'
 sudo rpm -ivh https://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm >/dev/null 2>&1
@@ -81,6 +81,7 @@ sudo service mysqld start >/dev/null 2>&1
 echo 'Set password for root user'
 mysql -uroot <<SQL
 set password for 'root'@'localhost' = password('root');
+create database tanakalab_v2;
 SQL
 
 echo 'Set chkconfig'
