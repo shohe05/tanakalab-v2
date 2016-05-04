@@ -4,7 +4,6 @@ Vagrant.configure("2") do |config|
   config.vm.box = "opscode-centos-6.6"
   config.vm.hostname = 'tanakalab-v2-dev-box'
 
-  config.vm.network :private_network, ip: "192.168.44.91"
   config.vm.network "forwarded_port", guest: 8000, host: 8000
 
   config.vm.provision :shell, path: 'bootstrap.sh', :privileged => false, keep_color: true

@@ -108,6 +108,12 @@ echo 'Install gulp and bower'
 npm install gulp -g
 npm install bower -g
 
+cp .env.example .env
+php artisan db:migrate
+npm install
+bower install
+gulp
+
 echo -e "\n\n"
 cat << EOS
 Done.

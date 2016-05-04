@@ -4,6 +4,7 @@
 .idea
 .DS_Store
 Thumbs.db
+.vagrant
 
 .phpstorm.meta.php
 _ide_helper*
