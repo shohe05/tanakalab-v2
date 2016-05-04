@@ -26,19 +26,19 @@ cd emacs-24.5
 make >/dev/null 2>&1
 sudo make install >/dev/null 2>&1
 
-;echo 'Clone my .emacs.d'
-;git clone https://github.com/shotana/emacs.d ~/.emacs.d >/dev/null 2>&1
+#echo 'Clone my .emacs.d'
+#git clone https://github.com/shotana/emacs.d ~/.emacs.d >/dev/null 2>&1
 
-;echo 'Change shell zsh'
-;expect -c '
-;spawn chsh -s /bin/zsh >/dev/null 2>&1
-;expect \"パスワード:\"
-;send -- \"vagrant\n\"
-;'
+#echo 'Change shell zsh'
+#expect -c '
+#spawn chsh -s /bin/zsh >/dev/null 2>&1
+#expect \"パスワード:\"
+#send -- \"vagrant\n\"
+#'
 
-;echo 'Apply oh-my-zsh'
-;sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)" >/dev/null 2>&1
-;sudo sed -i -e 's/ZSH_THEME="robbyrussell"/ZSH_THEME="steeef"/g' ~/.zshrc >/dev/null 2>&1
+#echo 'Apply oh-my-zsh'
+#sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)" >/dev/null 2>&1
+#sudo sed -i -e 's/ZSH_THEME="robbyrussell"/ZSH_THEME="steeef"/g' ~/.zshrc >/dev/null 2>&1
 
 echo 'Install PHP5.6'
 sudo rpm -ivh https://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm >/dev/null 2>&1
@@ -118,8 +118,8 @@ echo -e "\n\n"
 cat << EOS
 Done.
 
-;you have to do manually is this.
-;- chsh -s /bin/zsh
-;- re-ssh
-;)
-;EOS
+#you have to do manually is this.
+#- chsh -s /bin/zsh
+#- re-ssh
+#)
+#EOS
