@@ -6,6 +6,7 @@ function install {
 
 echo 'Install base dev tools'
 install gcc
+install gcc-c++
 install make
 install wget
 install git
@@ -13,10 +14,6 @@ install zsh
 install openssl-devel
 install vim-enhanced
 install ncurses-devel
-install mlocate
-
-echo 'locate updatedb'
-sudo updatedb >/dev/null 2>&1
 
 echo 'Install emacs 24.5'
 wget http://public.p-knowledge.co.jp/gnu-mirror/emacs/emacs-24.5.tar.gz >/dev/null 2>&1
@@ -85,9 +82,9 @@ create database tanakalab_v2;
 SQL
 
 echo 'Set chkconfig'
-chkconfig mysqld on
-chkconfig nginx on
-chkconfig php-fpm on
+sudo chkconfig mysqld on
+sudo chkconfig nginx on
+sudo chkconfig php-fpm on
 
 echo 'Disabled iptables'
 sudo service iptables stop >/dev/null 2>&1
@@ -96,30 +93,48 @@ echo 'Disabled SElinux'
 sudo setenforce 0
 
 echo 'Install nvm and nodejs 0.12.9'
-git clone git://github.com/creationix/nvm.git ~/.nvm
+git clone git://github.com/creationix/nvm.git ~/.nvm >/dev/null 2>&1
 source ~/.nvm/nvm.sh
-nvm install 0.12.9 
-nvm alias default v0.12.9
+nvm install 0.12.9 >/dev/null 2>&1
+nvm alias default v0.12.9 >/dev/null 2>&1
 echo 'if [[ -s ~/.nvm/nvm.sh ]];' >> ~/.bash_profile
 echo '  then source ~/.nvm/nvm.sh' >> ~/.bash_profile
 echo 'fi' >> ~/.bash_profile
 
-echo 'Install gulp and bower'
-npm install gulp -g
-npm install bower -g
+echo 'Install gulp'
+npm install gulp -g >/dev/null 2>&1
+echo 'Install bower'
+npm install bower -g >/dev/null 2>&1
 
+echo 'Setup Tanakalab'
+cd /vagrant
 cp .env.example .env
-php artisan db:migrate
-npm install
-bower install
-gulp
+
+echo 'run composer install'
+composer install
+
+echo 'Regenerate autoload files'
+php artisan clear-compiled
+php artisan optimize
+composer dump-autoload
+
+echo 'Migrate database'
+php artisan migrate >/dev/null 2>&1
+
+echo 'Create test user'
+php artisan db:seed --class=TestUserSeeder
+
+echo 'Run npm install'
+npm install >/dev/null 2>&1
+
+echo 'Run bower install'
+bower install >/dev/null 2>&1
+
+echo 'Run gulp'
+gulp >/dev/null 2>&1
 
 echo -e "\n\n"
-cat << EOS
-Done.
+echo "Done."
 
-#you have to do manually is this.
-#- chsh -s /bin/zsh
-#- re-ssh
-#)
-#EOS
+echo -e "\n\n"
+echo "Run server by this cmd: $ php artisan serve --host 0.0.0.0"
