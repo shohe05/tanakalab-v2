@@ -111,12 +111,12 @@ cd /vagrant
 cp .env.example .env
 
 echo 'run composer install'
-composer install
+composer install >/dev/null 2>&1
 
 echo 'Regenerate autoload files'
-php artisan clear-compiled
-php artisan optimize
-composer dump-autoload
+php artisan clear-compiled >/dev/null 2>&1
+php artisan optimize >/dev/null 2>&1
+composer dump-autoload >/dev/null 2>&1
 
 echo 'Migrate database'
 php artisan migrate >/dev/null 2>&1
