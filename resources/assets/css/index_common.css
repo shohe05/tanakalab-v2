@@ -192,6 +192,10 @@ h1, h2, h3, p, span, li, pre {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   min-height: 80px;
   margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
 }
 
 #article-list .left {
@@ -204,12 +208,12 @@ h1, h2, h3, p, span, li, pre {
   width: 64px;
   height: 64px;
   border-radius: 7px;
-  float:left
+  /*float:left*/
 }
 
 #article-list .right {
   margin-left: 15px;
-  float: left;
+  /*float: left;*/
   /*border-bottom: 1px solid rgba(0, 0, 0, 0.1);*/
 }
 
