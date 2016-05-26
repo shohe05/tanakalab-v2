@@ -42,49 +42,54 @@
             $('#loading').hide();
             $('#content').show();
             var html = '';
+
+            // DOM取得
+            var $articlePostForm = $('#article-post-form');
+            var $preview = $('#preview');
+
             // プレビュー
-            $('#article-post-form #title').keyup(function() {
-                var html = '<h1>' + $('#article-post-form #title').val() + '</h1><hr>' + marked($('#article-post-form textarea').val());
-                $('#preview').html(html);
+            $articlePostForm.find('#title').keyup(function() {
+                var html = '<h1>' + $articlePostForm.find('#title').val() + '</h1><hr>' + marked($articlePostForm.find('textarea').val());
+                $preview.html(html);
             });
             $('#article-post-form textarea').keyup(function() {
-                var html = '<h1>' + $('#article-post-form #title').val() + '</h1><hr>' + marked($('#article-post-form textarea').val());
-                $('#preview').html(html);
-                $('#preview pre code').each(function(i, e) {
+                var html = '<h1>' + $articlePostForm.find('#title').val() + '</h1><hr>' + marked($articlePostForm.find('textarea').val());
+                $preview.html(html);
+                $preview.find('pre code').each(function(i, e) {
                     hljs.highlightBlock(e, e.className);
                 });
             });
 
             // タグのフォームを追加
-            $('#add-tag-form').on('click', function() {
-                $('#tag-form').append('<input type="text" class="tag" placeholder="Tag">');
+            $articlePostForm.find('#add-tag-form').on('click', function() {
+                $articlePostForm.find('#tag-form').append('<input type="text" class="tag" placeholder="Tag">');
             });
-            $('#add-tag-form').click();
+            $articlePostForm.find('#add-tag-form').click();
 
             // 編集の場合
             if (location.pathname.match(/\/article\/\d+\/edit/)) {
                 var id = location.pathname.match(/\d+/)[0];
                 Article.find(id).then(function(data) {
                     var article = data.response;
-                    $('#title').val(article.title);
-                    $('#body').val(article.body);
+                    $articlePostForm.find('#title').val(article.title);
+                    $articlePostForm.find('#body').val(article.body);
                     $.each(article.tags, function() {
                         console.log(this.name);
-                        $('.tag:last-child').val(this.name);
-                        $('#add-tag-form').trigger('click');
+                        $articlePostForm.find('.tag:last-child').val(this.name);
+                        $articlePostForm.find('#add-tag-form').trigger('click');
                     });
 
-                    $('#article-post-form #title').keyup();
-                    $('#article-post-form textarea').keyup();
+                    $articlePostForm.find('#title').keyup();
+                    $articlePostForm.find('textarea').keyup();
                 });
             }
 
             // 投稿
-            $('#article-post-form #submit').on('click', function(){
-                var title = $('#article-post-form input[name=title]').val();
-                var body = $('#article-post-form textarea[name=body]').val();
+            $articlePostForm.find('#submit').on('click', function(){
+                var title = $articlePostForm.find('input[name=title]').val();
+                var body = $articlePostForm.find('textarea[name=body]').val();
                 var tags = [];
-                $.each($('#article-post-form .tag'), function () {
+                $.each($articlePostForm.find('.tag'), function () {
                     if ($(this).val() == "") {
                         return true;
                     }
