@@ -52,7 +52,7 @@
                 var html = '<h1>' + $articlePostForm.find('#title').val() + '</h1><hr>' + marked($articlePostForm.find('textarea').val());
                 $preview.html(html);
             });
-            $('#article-post-form textarea').keyup(function() {
+            $articlePostForm.find('textarea').keyup(function() {
                 var html = '<h1>' + $articlePostForm.find('#title').val() + '</h1><hr>' + marked($articlePostForm.find('textarea').val());
                 $preview.html(html);
                 $preview.find('pre code').each(function(i, e) {
