@@ -15,6 +15,12 @@
   word-wrap: break-word;
 }
 
+#article-body blockquote p {
+  font-style: italic;
+  font-size: 15px;
+  color: #998;
+}
+
 #article-body {
   border-bottom: 4px solid #e0e0e0;
 }
