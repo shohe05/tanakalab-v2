@@ -30,6 +30,11 @@ interface UserServiceInterface
     public function find($id);
 
     /**
+     * @return mixed
+     */
+    public function search();
+
+    /**
      * @param $user
      * @return array
      */

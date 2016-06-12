@@ -48,6 +48,8 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function() {
         Route::get('auth/check', ['as' => 'api.v1.auth.check', 'uses' => 'AuthController@check']);
         // ログアウト
         Route::delete('auth/logout', ['as' => 'api.v1.auth.logout', 'uses' => 'AuthController@logout']);
+        // ユーザー一覧
+        Route::get('users/search', ['as' => 'api.v1.user.search', 'uses' => 'UserController@search']);
         // ユーザー詳細
         Route::get('users/{user}', ['as' => 'api.v1.user.show', 'uses' => 'UserController@show']);
         // ユーザー削除

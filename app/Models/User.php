@@ -63,4 +63,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany(Notification::class);
     }
 
+    public function getIconFullPath()
+    {
+        return config('app.url').$this->image_path;
+    }
+
 }

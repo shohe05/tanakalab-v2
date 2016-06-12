@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Contracts\UserRepositoryInterface as UserRepository;
+use App\Repositories\Criteria\UserRepositorySearchCriteria;
 use App\Services\Contracts\UserServiceInterface;
 use Validator;
 
@@ -64,6 +65,16 @@ class UserService implements UserServiceInterface
     public function find($id)
     {
         return $this->userRepository->find($id);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function search()
+    {
+        $criteria = app(UserRepositorySearchCriteria::class);
+        $this->userRepository->pushCriteria($criteria);
+        return $this->userRepository->all();
     }
 
     /**

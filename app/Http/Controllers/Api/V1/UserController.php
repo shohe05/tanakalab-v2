@@ -30,7 +30,21 @@ class UserController extends V1Controller
     {
         $this->user = $user;
         $this->apiResponse = $apiResponse;
-        $this->middleware('jwt.auth');
+        $this->middleware('jwt.auth', ['except' => ['search']]);
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function search(Request $request)
+    {
+        $users = $this->user->search();
+        // TODO: APIのレスポンスを整形するPresenterを作ってその中でやるようにする
+        $users = $users->map(function($user) {
+            $user['image_path'] = $user->getIconFullPath();
+            return $user;
+        });
+        return $this->apiResponse->success($users);
     }
 
     /**
