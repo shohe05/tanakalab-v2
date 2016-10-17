@@ -86,10 +86,16 @@ class ApiResponse implements ApiResponseInterface
         $this->setMeta([
             'status' => $status
         ]);
-        return response()->json([
+        return response()
+            ->json([
             'meta' => $this->getMeta(),
             'response' => $data
-        ])->setStatusCode($httpStatusCode);
+            ])
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
+            ->header('Access-Control-Allow-Headers', 'Origin,Accept,Content-Type,X-Requested-With,X-CSRF-Token')
+            ->header('Access-Control-Allow-Credentials', 'true')
+            ->setStatusCode($httpStatusCode);
     }
 
     /**
