@@ -7,7 +7,7 @@ var CommentView = {
      * @returns {string}
      */
     render: function(comment) {
-        return '<li><img src="' + comment.user_image_url + '"><div class="right"><p class="author">' + comment.user_name + '</p><pre class="body">' + comment.body + '</pre></div></li>';
+        return '<li><img src="' + comment.user_image_url + '"><div class="right"><p class="author"><span style="color: grey" class="pull-right time">' + comment.created_at + '</span>' + comment.user_name + '</p><pre class="body">' + comment.body + '</pre></div></li>';
     },
 
     renderComments: function(comments) {
