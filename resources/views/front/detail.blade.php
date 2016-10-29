@@ -14,13 +14,14 @@
             <li id="post-form">
                 <img src="" alt="" />
                 <div class="right">
-                    <textarea name="body" rows="8" placeholder="Input comment"></textarea>
+                    <textarea id="comment-textarea" name="body" rows="8" placeholder="Input comment"></textarea>
                     <div id="submit-div">
                         <a id="submit" type="submit"><i class="fa fa-comment"></i>&nbsp;Comment</a>
                     </div>
                 </div>
             </li>
         </ul>
+        <span id="bottom"></span>
     </div>
 @stop
 
@@ -38,6 +39,8 @@
         var id = location.pathname.split(ARTICLE_DETAIL_URL)[1];
         $('#post-form img').attr('src', loginUser().image_path);
 
+
+        var latestCommentId;
         Article.find(id).then(function(data) {
             var article = data.response;
             var articleDom = ArticleView.renderDetail(article);
@@ -58,6 +61,8 @@
 
             $('#post-form').before(CommentView.renderComments(article.comments));
 
+            latestCommentId = article.comments[article.comments.length - 1].id;
+
             $('title').text(article.title + ' | Tanakalab');
 
             // 削除
@@ -69,8 +74,6 @@
                     location.href = (ARTICLE_INDEX_URL);
                 });
             });
-
-            console.log(article);
 
             // クリップ
             $('#clip-link').on('click', function() {
@@ -105,6 +108,28 @@
             })
 
 
+            // コメントを5秒おきに取得
+            var fetchComment = function () {
+                Article.find(id).then(function(data) {
+                    var comments = data.response.comments;
+                    var newComments = [];
+                    for(var i = 0; i<comments.length; i++) {
+                        if (comments[i].id <= latestCommentId)
+                            continue;
+
+                        newComments.push(comments[i]);
+                    }
+                    latestCommentId = comments[comments.length-1].id;
+                    $('#post-form').before(CommentView.renderComments(newComments));
+                    if($('#comment-textarea').is(':focus')) {
+                        goBottom('bottom');
+                    }
+                });
+            };
+
+            setInterval(fetchComment, 5000);
+
+
         });
 
         // コメント投稿
@@ -119,6 +144,11 @@
                 $('#comment-btn span.count').text(count + 1);
             });
         });
+
+        function goBottom(targetId) {
+            var target = $("#" + targetId);
+            $(window).scrollTop(target.offset().top);
+        }
 
 
     </script>
